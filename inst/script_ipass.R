@@ -1,5 +1,5 @@
 
-library(crossSurv)
+library(YPPE)
 
 mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle", n_int=10)
 bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes", n_int=10)
@@ -31,6 +31,5 @@ abline(v=t_bayes, col="green")
 
 
 
-crossTime(mle, newdata1, newdata2, nboot=100)
-crossTime(bayes, newdata1, newdata2)
-
+t_mle <- crossTime(mle, newdata1, newdata2, nboot=1000)
+t_mle

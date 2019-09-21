@@ -2,8 +2,8 @@
 
 devtools::load_all(".")
 devtools::document()
-devtools::install()
-#devtools::install(quick=TRUE)
+#devtools::install()
+devtools::install(quick=TRUE)
 
 
 devtools::build()
