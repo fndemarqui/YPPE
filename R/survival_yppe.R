@@ -169,9 +169,10 @@ crossTime.yppe <- function(object, newdata1, newdata2,
   p <-object$p
   mf <- object$mf
   labels <- names(mf)[-1]
-  time <- sort(stats::model.response(mf)[,1])
-  status <- sort(stats::model.response(mf)[,2])
-  data <- data.frame(cbind(time, status, mf[,-1]))
+  time <- stats::model.response(mf)[,1]
+  status <- stats::model.response(mf)[,2]
+  o <- order(time)
+  data <- data.frame(cbind(time, status, mf[,-1]))[o,]
   names(data) <- c("time", "status", labels)
   tau0 <- min(time)
   rho <- object$rho
