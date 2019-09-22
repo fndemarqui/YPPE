@@ -1,2 +1,7 @@
 ^YPPE\.Rproj$
 ^\.Rproj\.user$
+^script_development\.R$
+^script_ipass\.R$
+^packrat/
+^\.Rprofile$
+^CRAN-RELEASE$

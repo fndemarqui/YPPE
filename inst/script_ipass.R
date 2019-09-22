@@ -31,5 +31,5 @@ abline(v=t_bayes, col="green")
 
 
 
-t_mle <- crossTime(mle, newdata1, newdata2, nboot=100)
+t_mle <- crossTime(mle, newdata1, newdata2, nboot=10)
 t_mle
