@@ -1,6 +1,6 @@
 
 
-devtools::load_all(".")
+devtools::load_all()
 devtools::document()
 #devtools::install()
 devtools::install(quick=TRUE)
