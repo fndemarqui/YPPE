@@ -36,3 +36,16 @@ yppe returns an object of class "yppe" containing the fitted model.
 \description{
 Fits the Yang and Prentice model with baseline distribution modelled by the piecewise exponential distribution.
 }
+\examples{
+\dontrun{
+# ML approach:
+library(YPPE)
+mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+summary(mle)
+
+# Bayesian approach:
+bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+summary(bayes)
+}
+
+}

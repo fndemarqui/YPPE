@@ -147,7 +147,17 @@ yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, hyper_parms, ...) {
 #' @param hyper_parms a list containing the hyper-parameters of the prior distributions (when approach = "bayes"). If not specified, default values are used.
 #' @param ... Arguments passed to either `rstan::optimizing` or `rstan::sampling` .
 #' @return yppe returns an object of class "yppe" containing the fitted model.
+#' @examples
+#' \dontrun{
+#' # ML approach:
+#' library(YPPE)
+#' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+#' summary(mle)
 #'
+#' # Bayesian approach:
+#' bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+#' summary(bayes)
+#' }
 #'
 yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
                  approach = c("mle", "bayes"),

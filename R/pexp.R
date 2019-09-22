@@ -159,12 +159,6 @@ timeGrid <- function(time, status, n.int=NULL)
 }
 
 
-#' Function to identify the times' intervals
-#' @export
-#' @param time vector of times
-#' @param tgrid time grid
-#' @return indicator function of times's intervals
-
 findInt <- function(time, tgrid)
 {
   id <- as.numeric(cut(time, tgrid, include.lowest = TRUE))

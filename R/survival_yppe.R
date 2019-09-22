@@ -37,10 +37,13 @@ yppeSurv2 <- function(time, z, x, par, rho, tau, n_int){
 }
 
 
-
-## registering in the "survival" package
-# registerS3method("survfit", "yppe", "survfit.yppe", envir=getNamespace("survival"))
-
+#---------------------------------------------
+#' Generic S3 method
+#' @aliases survfit
+#' @export
+#' @param object an object of class yppe
+#' @param ... further arguments passed to or from other methods.
+survfit <- function(object, ...) UseMethod("survfit")
 
 #' Survival function for the YPPE model
 #'
@@ -52,15 +55,32 @@ yppeSurv2 <- function(time, z, x, par, rho, tau, n_int){
 #' @param ... further arguments passed to or from other methods.
 #' @return  a list containing the estimated survival probabilities.
 #' @examples
+#' \dontrun{
+#' # ML approach:
 #' library(YPPE)
 #' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
-#' newdata <- data.frame(arm=as.factor(0:1))
-#' St <- survfit(mle, newdata)
+#' summary(mle)
 #' ekm <- survfit(Surv(time, status)~arm, data=ipass)
-#' plot(ekm, col=1:2)
+#' newdata <- data.frame(arm=0:1)
+#' St <- survfit(mle, newdata)
 #' time <- sort(ipass$time)
+#' plot(ekm, col=1:2)
 #' lines(time, St[[1]])
 #' lines(time, St[[2]], col=2)
+#'
+#' # Bayesian approach:
+#' bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+#' summary(bayes)
+#' ekm <- survfit(Surv(time, status)~arm, data=ipass)
+#' newdata <- data.frame(arm=0:1)
+#' St <- survfit(bayes, newdata)
+#' time <- sort(ipass$time)
+#' plot(ekm, col=1:2)
+#' lines(time, St[[1]])
+#' lines(time, St[[2]], col=2)
+#' }
+#'
+
 survfit.yppe <- function(object, newdata, ...){
   mf <- object$mf
   labels <- names(mf)[-1]
@@ -159,23 +179,53 @@ yppeCrossSurv2 <- function(z1, z2, x, par, rho, tau0, tau, n_int){
 #' @param ... further arguments passed to or from other methods.
 crossTime <- function(object, ...) UseMethod("crossTime")
 
-#' Function to compute the crossing survival times
+#' Survival function for the YPPE model
 #'
-#' @rdname crossTime
+#' @aliases crossTime.yppe
+#' @method crossTime yppe
 #' @export
 #' @param object an object of the class yppe.
 #' @param newdata1 a data frame containing the first set of explanatory variables
 #' @param newdata2 a data frame containing the second set of explanatory variables
 #' @param conf.level level of the confidence/credible intervals
 #' @param nboot number of bootstrap samples (default nboot=4000); ignored if approach="bayes".
-#' @param ... further arguments passed to or from other methods.
 #' @return  the crossing survival time
 #' @examples
+#' \dontrun{
+#' # ML approach:
 #' library(YPPE)
 #' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+#' summary(mle)
 #' newdata1 <- data.frame(arm=0)
 #' newdata2 <- data.frame(arm=1)
-#' crossTime(mle, newdata1, newdata2, nboot=10)
+#' tcross <- crossTime(mle, newdata1, newdata2)
+#' tcross
+#' ekm <- survfit(Surv(time, status)~arm, data=ipass)
+#' newdata <- data.frame(arm=0:1)
+#' St <- survfit(mle, newdata)
+#' time <- sort(ipass$time)
+#' plot(ekm, col=1:2)
+#' lines(time, St[[1]])
+#' lines(time, St[[2]], col=2)
+#' abline(v=tcross, col="blue")
+#'
+#' # Bayesian approach:
+#' bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+#' summary(bayes)
+#' newdata1 <- data.frame(arm=0)
+#' newdata2 <- data.frame(arm=1)
+#' tcross <- crossTime(bayes, newdata1, newdata2)
+#' tcross
+#' ekm <- survfit(Surv(time, status)~arm, data=ipass)
+#' newdata <- data.frame(arm=0:1)
+#' St <- survfit(bayes, newdata)
+#' time <- sort(ipass$time)
+#' plot(ekm, col=1:2)
+#' lines(time, St[[1]])
+#' lines(time, St[[2]], col=2)
+#' abline(v=tcross, col="blue")
+#' }
+
 crossTime.yppe <- function(object, newdata1, newdata2,
                            conf.level=0.95, nboot=4000){
   q <-object$q

@@ -2,40 +2,15 @@
 % Please edit documentation in R/survival_yppe.R
 \name{survfit}
 \alias{survfit}
-\alias{survfit.yppe}
-\title{Defining S3 generic method}
+\title{Generic S3 method}
 \usage{
 survfit(object, ...)
-
-\method{survfit}{yppe}(object, newdata)
 }
 \arguments{
 \item{object}{an object of class yppe}
 
 \item{...}{further arguments passed to or from other methods.}
-
-\item{newdata}{a data frame containing the set of explanatory variables.}
-
-\item{object}{an object of the class yppe.}
-
-\item{...}{further arguments passed to or from other methods.}
-}
-\value{
-a list containing the estimated survival probabilities.
 }
 \description{
-Defining S3 generic method
-
-Survival function for the YPPE model
-}
-\examples{
-library(YPPE)
-mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
-newdata <- data.frame(arm=as.factor(0:1))
-St <- survfit(mle, newdata)
-ekm <- survfit(Surv(time, status)~arm, data=ipass)
-plot(ekm, col=1:2)
-time <- sort(ipass$time)
-lines(time, St[[1]])
-lines(time, St[[2]], col=2)
+Generic S3 method
 }

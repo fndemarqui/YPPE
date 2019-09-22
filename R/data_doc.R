@@ -11,10 +11,7 @@
 #'   \item status: failure indicator (1 - failure; 0 - otherwise)
 #'   \item arm: (1 - gefitinib; 0 - carboplatin/paclitaxel doublet chemotherapy)
 #' }
-#' @references  Analysis of time to event outcomes in randomized
-#' controlled trials by generalized additive models.
-#' C. Argyropoulos and M. L. Unruh.
-#' PLOS One, vol. 10, pag. 1-33, 2015.
+#' @references  Argyropoulos, C. and Unruh, M. L. (2015). Analysis of time to event outcomes in randomized controlled trials by generalized additive models. PLOS One 10, 1-33.
 #'
 NULL
 
