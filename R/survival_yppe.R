@@ -36,26 +36,33 @@ yppeSurv2 <- function(time, z, x, par, rho, tau, n_int){
   return(St)
 }
 
+#' Defining S3 generic method
+#' @export
+#' @param object an object of class yppe
+#' @param ... further arguments passed to or from other methods.
+survfit <- function(object, ...) UseMethod("survfit")
 
 #---------------------------------------------
-#' Survival function of the yppe model (original formulation)
+#' Survival function for the YPPE model
 #'
-#' @aliases survfit
-#' @export
+#' @aliases survfit.yppe
+#' @rdname survfit
+#' @method survfit yppe
+#' @export survfit yppe
 #' @param object an object of the class yppe.
 #' @param newdata a data frame containing the set of explanatory variables.
 #' @param ... further arguments passed to or from other methods.
 #' @return  a list containing the estimated survival probabilities.
-#'
-
-survfit <- function(object, ...) UseMethod("survfit")
-
-#---------------------------------------------
-#' Survival function of the yppe model (original formulation)
-#'
-#' @rdname survfit
-#' @export
-#'
+#' @examples
+#' library(YPPE)
+#' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+#' newdata <- data.frame(arm=as.factor(0:1))
+#' St <- survfit(mle, newdata)
+#' ekm <- survfit(Surv(time, status)~arm, data=ipass)
+#' plot(ekm, col=1:2)
+#' time <- sort(ipass$time)
+#' lines(time, St[[1]])
+#' lines(time, St[[2]], col=2)
 survfit.yppe <- function(object, newdata){
   mf <- object$mf
   labels <- names(mf)[-1]
@@ -145,26 +152,34 @@ yppeCrossSurv2 <- function(z1, z2, x, par, rho, tau0, tau, n_int){
 
 
 #---------------------------------------------
-#' Function to compute the crossing survival times
-#'
+#' Generic S3 method
 #' @aliases crossTime
 #' @export
-#' @param object an object of the class yppe.
-#' @param newdata1 a data frame containing the first set of explanatory variables
-#' @param newdata2 a data frame containing the second set of explanatory variables
-#' @param prob quantiles used to compute the confidence/credible intervals
-#' @param nboot number of bootstrap samples (default nboot=4000); ignored if approach="bayes".
+#' @param object an object of class yppe
 #' @param ... further arguments passed to or from other methods.
-#' @return  the crossing survival time
-#'
 crossTime <- function(object, ...) UseMethod("crossTime")
 
 #' Function to compute the crossing survival times
-#' @rdname crossTime
-#' @export
 #'
+#' @aliases crossTime.yppe
+#' @rdname crossTime
+#' @method corsstime yppe
+#' @export crossTime yppe
+#' @param object an object of the class yppe.
+#' @param newdata1 a data frame containing the first set of explanatory variables
+#' @param newdata2 a data frame containing the second set of explanatory variables
+#' @param conf.level level of the confidence/credible intervals
+#' @param nboot number of bootstrap samples (default nboot=4000); ignored if approach="bayes".
+#' @param ... further arguments passed to or from other methods.
+#' @return  the crossing survival time
+#' @examples
+#' library(YPPE)
+#' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+#' newdata1 <- data.frame(arm=0)
+#' newdata2 <- data.frame(arm=1)
+#' crossTime(mle, newdata1, newdata2, nboot=10)
 crossTime.yppe <- function(object, newdata1, newdata2,
-                           prob=c(0.025, 0.975), nboot=4000){
+                           conf.level=0.95, nboot=4000){
   q <-object$q
   p <-object$p
   mf <- object$mf
@@ -187,6 +202,8 @@ crossTime.yppe <- function(object, newdata1, newdata2,
   }
 
   I <- c(tau0, 1.5*tau)
+  alpha <- 1 - conf.level
+  prob <- c(alpha/2, 1-alpha/2)
 
   if(object$approach=="mle"){
     t <- c()

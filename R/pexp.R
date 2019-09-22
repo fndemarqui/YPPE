@@ -1,19 +1,6 @@
 
 
 #---------------------------------------------
-#' Sturges rule to computing the number of intervals
-#'
-#' @export
-#' @param n Sample size.
-#' @return The number of intervals \code{n}.
-#' @examples
-#' sturges(100)
-sturges <- function(n)
-{
-  return(ceiling(1+3.3*log(n, base=10)))
-}
-
-#---------------------------------------------
 # Hazard function of the PE distribution
 
 hpexp <- function(x, tgrid, rates)

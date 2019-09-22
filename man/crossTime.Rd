@@ -3,15 +3,15 @@
 \name{crossTime}
 \alias{crossTime}
 \alias{crossTime.yppe}
-\title{Function to compute the crossing survival times}
+\title{Generic S3 method}
 \usage{
 crossTime(object, ...)
 
-\method{crossTime}{yppe}(object, newdata1, newdata2, prob = c(0.025,
-  0.975), nboot = 4000)
+\method{corsstime}{yppe}(object, newdata1, newdata2, conf.level = 0.95,
+  nboot = 4000)
 }
 \arguments{
-\item{object}{an object of the class yppe.}
+\item{object}{an object of class yppe}
 
 \item{...}{further arguments passed to or from other methods.}
 
@@ -19,15 +19,26 @@ crossTime(object, ...)
 
 \item{newdata2}{a data frame containing the second set of explanatory variables}
 
-\item{prob}{quantiles used to compute the confidence/credible intervals}
+\item{conf.level}{level of the confidence/credible intervals}
 
 \item{nboot}{number of bootstrap samples (default nboot=4000); ignored if approach="bayes".}
+
+\item{object}{an object of the class yppe.}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 the crossing survival time
 }
 \description{
-Function to compute the crossing survival times
+Generic S3 method
 
 Function to compute the crossing survival times
+}
+\examples{
+library(YPPE)
+mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+newdata1 <- data.frame(arm=0)
+newdata2 <- data.frame(arm=1)
+crossTime(mle, newdata1, newdata2, nboot=10)
 }
