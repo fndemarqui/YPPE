@@ -1,8 +1,7 @@
 Package: YPPE
 Title: Yang and Prentice Model with Piecewise Exponential Baseline Distribution
 Version: 1.0.0
-Authors@R: c(person("Fabio", "Demarqui", email = "fndemarqui@est.ufmg.br", role = "aut"))
-Maintainer: Fabio N Demarqui <fndemarqui@est.ufmg.br>
+Authors@R: person(given = "Fabio", family = "Demarqui", email = "fndemarqui@est.ufmg.br", role = c("aut", "cre"))
 Description: Semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution curves. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
 License: GPL (>= 2)
 URL: https://github.com/fndemarqui/YPPE
@@ -28,3 +27,4 @@ LinkingTo:
 SystemRequirements: GNU make
 RoxygenNote: 6.1.1
 Suggests: testthat
+
