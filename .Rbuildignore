@@ -5,3 +5,4 @@
 ^packrat/
 ^\.Rprofile$
 ^CRAN-RELEASE$
+^\.travis\.yml$
