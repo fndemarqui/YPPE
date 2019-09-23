@@ -2,48 +2,56 @@
 % Please edit documentation in R/survival_yppe.R
 \name{survfit}
 \alias{survfit}
-<<<<<<< HEAD
-\title{Generic S3 method}
-=======
+\alias{Defining}
+\alias{S3}
+\alias{generic}
+\alias{method}
 \alias{survfit.yppe}
-\title{Defining S3 generic method}
->>>>>>> acab4ca1a7dfdbc38e40eef632c8c39d60c4f526
+\title{Generic S3 method}
 \usage{
 survfit(object, ...)
+
+\method{survfit}{yppe}(object, newdata)
 }
 \arguments{
 \item{object}{an object of class yppe}
 
 \item{...}{further arguments passed to or from other methods.}
-<<<<<<< HEAD
-}
-\description{
-Generic S3 method
-=======
 
 \item{newdata}{a data frame containing the set of explanatory variables.}
-
-\item{object}{an object of the class yppe.}
-
-\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 a list containing the estimated survival probabilities.
 }
 \description{
-Defining S3 generic method
+Generic S3 method
 
 Survival function for the YPPE model
 }
 \examples{
+\dontrun{
+# ML approach:
 library(YPPE)
 mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
-newdata <- data.frame(arm=as.factor(0:1))
-St <- survfit(mle, newdata)
+summary(mle)
 ekm <- survfit(Surv(time, status)~arm, data=ipass)
-plot(ekm, col=1:2)
+newdata <- data.frame(arm=0:1)
+St <- survfit(mle, newdata)
 time <- sort(ipass$time)
+plot(ekm, col=1:2)
 lines(time, St[[1]])
 lines(time, St[[2]], col=2)
->>>>>>> acab4ca1a7dfdbc38e40eef632c8c39d60c4f526
+
+# Bayesian approach:
+bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+summary(bayes)
+ekm <- survfit(Surv(time, status)~arm, data=ipass)
+newdata <- data.frame(arm=0:1)
+St <- survfit(bayes, newdata)
+time <- sort(ipass$time)
+plot(ekm, col=1:2)
+lines(time, St[[1]])
+lines(time, St[[2]], col=2)
+}
+
 }
