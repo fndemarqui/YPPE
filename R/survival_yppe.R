@@ -40,19 +40,22 @@ yppeSurv2 <- function(time, z, x, par, rho, tau, n_int){
 #---------------------------------------------
 #' Generic S3 method
 #' @aliases survfit
+#' Defining S3 generic method
 #' @export
 #' @param object an object of class yppe
 #' @param ... further arguments passed to or from other methods.
+#'
 survfit <- function(object, ...) UseMethod("survfit")
 
+
+#---------------------------------------------
 #' Survival function for the YPPE model
 #'
 #' @aliases survfit.yppe
+#' @rdname survfit
 #' @method survfit yppe
-#' @export
-#' @param object an object of the class yppe.
+#' @export survfit yppe
 #' @param newdata a data frame containing the set of explanatory variables.
-#' @param ... further arguments passed to or from other methods.
 #' @return  a list containing the estimated survival probabilities.
 #' @examples
 #' \dontrun{
@@ -80,8 +83,7 @@ survfit <- function(object, ...) UseMethod("survfit")
 #' lines(time, St[[2]], col=2)
 #' }
 #'
-
-survfit.yppe <- function(object, newdata, ...){
+survfit.yppe <- function(object, newdata){
   mf <- object$mf
   labels <- names(mf)[-1]
   time <- sort( stats::model.response(mf)[,1])
@@ -172,19 +174,20 @@ yppeCrossSurv2 <- function(z1, z2, x, par, rho, tau0, tau, n_int){
 
 
 #---------------------------------------------
-#' Generic S3 method
+#' Generic S3 method crossTime
 #' @aliases crossTime
 #' @export
 #' @param object an object of class yppe
 #' @param ... further arguments passed to or from other methods.
 crossTime <- function(object, ...) UseMethod("crossTime")
 
-#' Survival function for the YPPE model
+
+#' Computes the crossing survival times
 #'
 #' @aliases crossTime.yppe
+#' @rdname crossTime
 #' @method crossTime yppe
-#' @export
-#' @param object an object of the class yppe.
+#' @export crossTime yppe
 #' @param newdata1 a data frame containing the first set of explanatory variables
 #' @param newdata2 a data frame containing the second set of explanatory variables
 #' @param conf.level level of the confidence/credible intervals
@@ -225,7 +228,7 @@ crossTime <- function(object, ...) UseMethod("crossTime")
 #' lines(time, St[[2]], col=2)
 #' abline(v=tcross, col="blue")
 #' }
-
+#'
 crossTime.yppe <- function(object, newdata1, newdata2,
                            conf.level=0.95, nboot=4000){
   q <-object$q

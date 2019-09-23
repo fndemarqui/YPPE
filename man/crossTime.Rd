@@ -2,15 +2,55 @@
 % Please edit documentation in R/survival_yppe.R
 \name{crossTime}
 \alias{crossTime}
+<<<<<<< HEAD
 \title{Generic S3 method}
 \usage{
 crossTime(object, ...)
+=======
+\alias{crossTime.yppe}
+\title{Generic S3 method}
+\usage{
+crossTime(object, ...)
+
+\method{corsstime}{yppe}(object, newdata1, newdata2, conf.level = 0.95,
+  nboot = 4000)
+>>>>>>> acab4ca1a7dfdbc38e40eef632c8c39d60c4f526
 }
 \arguments{
 \item{object}{an object of class yppe}
 
 \item{...}{further arguments passed to or from other methods.}
+<<<<<<< HEAD
 }
 \description{
 Generic S3 method
+=======
+
+\item{newdata1}{a data frame containing the first set of explanatory variables}
+
+\item{newdata2}{a data frame containing the second set of explanatory variables}
+
+\item{conf.level}{level of the confidence/credible intervals}
+
+\item{nboot}{number of bootstrap samples (default nboot=4000); ignored if approach="bayes".}
+
+\item{object}{an object of the class yppe.}
+
+\item{...}{further arguments passed to or from other methods.}
+}
+\value{
+the crossing survival time
+}
+\description{
+Generic S3 method
+
+Function to compute the crossing survival times
+>>>>>>> acab4ca1a7dfdbc38e40eef632c8c39d60c4f526
+}
+\examples{
+library(YPPE)
+mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+newdata1 <- data.frame(arm=0)
+newdata2 <- data.frame(arm=1)
+crossTime(mle, newdata1, newdata2, nboot=10)
 }
