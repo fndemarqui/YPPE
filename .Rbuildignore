@@ -6,4 +6,7 @@
 ^\.Rprofile$
 ^CRAN-RELEASE$
 ^\.travis\.yml$
+<<<<<<< HEAD
 ^cran-comments\.md$
+=======
+>>>>>>> 22c7cdb7c8f3a4851cd69c04cfa42a24b3bec811
