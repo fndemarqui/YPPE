@@ -27,5 +27,4 @@ LinkingTo:
 SystemRequirements: GNU make
 RoxygenNote: 6.1.1
 Suggests: testthat
-Author: Fabio Demarqui [cre, aut]
-Maintainer: Fabio Demarqui <fndemarqui@est.ufmg.br>
+
