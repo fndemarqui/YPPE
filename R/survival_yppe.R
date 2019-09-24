@@ -36,26 +36,27 @@ yppeSurv2 <- function(time, z, x, par, rho, tau, n_int){
   return(St)
 }
 
-
 #---------------------------------------------
-#' Generic S3 method
+#' Generic S3 method survfit
 #' @aliases survfit
-#' Defining S3 generic method
 #' @export
-#' @param object an object of class yppe
+#' @param object a fitted model object
 #' @param ... further arguments passed to or from other methods.
+#' @return the crossing survival time
 #'
 survfit <- function(object, ...) UseMethod("survfit")
-
 
 #---------------------------------------------
 #' Survival function for the YPPE model
 #'
 #' @aliases survfit.yppe
-#' @rdname survfit
+#' @rdname survfit-methods
 #' @method survfit yppe
-#' @export survfit yppe
+#' @export
+#' @export survfit
+#' @param object an object of the class yppe
 #' @param newdata a data frame containing the set of explanatory variables.
+#' @param ... further arguments passed to or from other methods.
 #' @return  a list containing the estimated survival probabilities.
 #' @examples
 #' \dontrun{
@@ -83,7 +84,7 @@ survfit <- function(object, ...) UseMethod("survfit")
 #' lines(time, St[[2]], col=2)
 #' }
 #'
-survfit.yppe <- function(object, newdata){
+survfit.yppe <- function(object, newdata, ...){
   mf <- object$mf
   labels <- names(mf)[-1]
   time <- sort( stats::model.response(mf)[,1])
@@ -177,21 +178,26 @@ yppeCrossSurv2 <- function(z1, z2, x, par, rho, tau0, tau, n_int){
 #' Generic S3 method crossTime
 #' @aliases crossTime
 #' @export
-#' @param object an object of class yppe
+#' @param object a fitted model object
 #' @param ... further arguments passed to or from other methods.
+#' @return the crossing survival time
+#'
 crossTime <- function(object, ...) UseMethod("crossTime")
 
 
 #' Computes the crossing survival times
 #'
 #' @aliases crossTime.yppe
-#' @rdname crossTime
+#' @rdname crossTime-methods
 #' @method crossTime yppe
-#' @export crossTime yppe
+#' @export
+#' @export crossTime
+#' @param object an object of class yppe
 #' @param newdata1 a data frame containing the first set of explanatory variables
 #' @param newdata2 a data frame containing the second set of explanatory variables
 #' @param conf.level level of the confidence/credible intervals
 #' @param nboot number of bootstrap samples (default nboot=4000); ignored if approach="bayes".
+#' @param ... further arguments passed to or from other methods.
 #' @return  the crossing survival time
 #' @examples
 #' \dontrun{
@@ -230,7 +236,7 @@ crossTime <- function(object, ...) UseMethod("crossTime")
 #' }
 #'
 crossTime.yppe <- function(object, newdata1, newdata2,
-                           conf.level=0.95, nboot=4000){
+                           conf.level=0.95, nboot=4000, ...){
   q <-object$q
   p <-object$p
   mf <- object$mf
