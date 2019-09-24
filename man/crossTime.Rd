@@ -2,6 +2,7 @@
 % Please edit documentation in R/survival_yppe.R
 \name{crossTime}
 \alias{crossTime}
+<<<<<<< HEAD
 \title{Generic S3 method crossTime}
 \usage{
 crossTime(object, ...)
@@ -10,10 +11,74 @@ crossTime(object, ...)
 \item{object}{a fitted model object}
 
 \item{...}{further arguments passed to or from other methods.}
+=======
+\alias{crossTime.yppe}
+\title{Generic S3 method crossTime}
+\usage{
+crossTime(object, ...)
+
+\method{crossTime}{yppe}(object, newdata1, newdata2, conf.level = 0.95,
+  nboot = 4000)
+}
+\arguments{
+\item{object}{an object of class yppe}
+
+\item{...}{further arguments passed to or from other methods.}
+
+\item{newdata1}{a data frame containing the first set of explanatory variables}
+
+\item{newdata2}{a data frame containing the second set of explanatory variables}
+
+\item{conf.level}{level of the confidence/credible intervals}
+
+\item{nboot}{number of bootstrap samples (default nboot=4000); ignored if approach="bayes".}
+>>>>>>> 22c7cdb7c8f3a4851cd69c04cfa42a24b3bec811
 }
 \value{
 the crossing survival time
 }
 \description{
 Generic S3 method crossTime
+<<<<<<< HEAD
+=======
+
+Computes the crossing survival times
+}
+\examples{
+\dontrun{
+# ML approach:
+library(YPPE)
+mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+summary(mle)
+newdata1 <- data.frame(arm=0)
+newdata2 <- data.frame(arm=1)
+tcross <- crossTime(mle, newdata1, newdata2)
+tcross
+ekm <- survfit(Surv(time, status)~arm, data=ipass)
+newdata <- data.frame(arm=0:1)
+St <- survfit(mle, newdata)
+time <- sort(ipass$time)
+plot(ekm, col=1:2)
+lines(time, St[[1]])
+lines(time, St[[2]], col=2)
+abline(v=tcross, col="blue")
+
+# Bayesian approach:
+bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+summary(bayes)
+newdata1 <- data.frame(arm=0)
+newdata2 <- data.frame(arm=1)
+tcross <- crossTime(bayes, newdata1, newdata2)
+tcross
+ekm <- survfit(Surv(time, status)~arm, data=ipass)
+newdata <- data.frame(arm=0:1)
+St <- survfit(bayes, newdata)
+time <- sort(ipass$time)
+plot(ekm, col=1:2)
+lines(time, St[[1]])
+lines(time, St[[2]], col=2)
+abline(v=tcross, col="blue")
+}
+
+>>>>>>> 22c7cdb7c8f3a4851cd69c04cfa42a24b3bec811
 }
