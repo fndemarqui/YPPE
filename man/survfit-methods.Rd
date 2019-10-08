@@ -20,7 +20,7 @@ a list containing the estimated survival probabilities.
 Survival function for the YPPE model
 }
 \examples{
-\dontrun{
+\donttest{
 # ML approach:
 library(YPPE)
 mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")

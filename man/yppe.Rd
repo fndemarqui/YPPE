@@ -37,7 +37,7 @@ yppe returns an object of class "yppe" containing the fitted model.
 Fits the Yang and Prentice model with baseline distribution modelled by the piecewise exponential distribution.
 }
 \examples{
-\dontrun{
+\donttest{
 # ML approach:
 library(YPPE)
 mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")

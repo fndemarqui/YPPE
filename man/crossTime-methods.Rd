@@ -27,7 +27,7 @@ the crossing survival time
 Computes the crossing survival times
 }
 \examples{
-\dontrun{
+\donttest{
 # ML approach:
 library(YPPE)
 mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")

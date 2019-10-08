@@ -148,7 +148,7 @@ yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, hyper_parms, ...) {
 #' @param ... Arguments passed to either `rstan::optimizing` or `rstan::sampling` .
 #' @return yppe returns an object of class "yppe" containing the fitted model.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # ML approach:
 #' library(YPPE)
 #' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")

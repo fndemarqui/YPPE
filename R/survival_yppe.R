@@ -59,7 +59,7 @@ survfit <- function(object, ...) UseMethod("survfit")
 #' @param ... further arguments passed to or from other methods.
 #' @return  a list containing the estimated survival probabilities.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # ML approach:
 #' library(YPPE)
 #' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
@@ -200,7 +200,7 @@ crossTime <- function(object, ...) UseMethod("crossTime")
 #' @param ... further arguments passed to or from other methods.
 #' @return  the crossing survival time
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # ML approach:
 #' library(YPPE)
 #' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
