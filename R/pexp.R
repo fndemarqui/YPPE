@@ -121,31 +121,31 @@ rpexp <- function(n, tgrid, rates){
 #' @export
 #' @param time Vector of failure times
 #' @param status Vector of failure indicators
-#' @param n.int Optional. Number of intervals. If \code{NULL}, the number of intervals is
+#' @param n_int Optional. Number of intervals. If \code{NULL}, the number of intervals is
 #' set to be equal to the number of distinct observed failure times.
 #' @return Time grid.
 
 
-timeGrid <- function(time, status, n.int=NULL)
+timeGrid <- function(time, status, n_int=NULL)
 {
   o <- order(time)
   time <- time[o]
   status <- status[o]
   time.aux <- unique(time[status==1])
-  if(is.null(n.int))
+  if(is.null(n_int))
   {
-    n.int <- length(time.aux)
+    n_int <- length(time.aux)
   }
 
   m <- length(time.aux)
-  if(n.int > m)
+  if(n_int > m)
   {
     tgrid <- c(0,unique(time[status==1]))
     tgrid[length(tgrid)] <- Inf
   }
   else
   {
-    b <- min(m,n.int)
+    b <- min(m,n_int)
     k1 <- trunc(m/b)
     r <- m-b*k1
     k2 <- k1+1
