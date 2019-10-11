@@ -279,6 +279,10 @@ yppeBoot <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL,
     n_int <- ceiling(sqrt(length(time)))
   }
 
+  if(!is.null(rho)){
+    n_int <- length(rho) - 1
+  }
+
   if(is.null(rho)){
     rho <- timeGrid(time, status, n_int)
   }

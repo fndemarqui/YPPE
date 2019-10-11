@@ -7,7 +7,7 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* This is a new release. All changes requested in the previous submission were made.
 
 * The package has been tested using the following devtools' functions:
 
