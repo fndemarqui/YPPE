@@ -198,8 +198,11 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   }
 
   if(is.null(rho)){
-    rho <- timeGrid(time, status, n_int)
+    rho <- timeGrid(time, status, n_int)/tau
+  }else{
+    rho <- rho/tau
   }
+  n_int <- length(rho) - 1
 
   if(approach=="mle"){
     if(p==0){
