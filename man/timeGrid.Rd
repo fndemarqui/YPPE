@@ -4,14 +4,14 @@
 \alias{timeGrid}
 \title{Time grid}
 \usage{
-timeGrid(time, status, n.int = NULL)
+timeGrid(time, status, n_int = NULL)
 }
 \arguments{
 \item{time}{Vector of failure times}
 
 \item{status}{Vector of failure indicators}
 
-\item{n.int}{Optional. Number of intervals. If \code{NULL}, the number of intervals is
+\item{n_int}{Optional. Number of intervals. If \code{NULL}, the number of intervals is
 set to be equal to the number of distinct observed failure times.}
 }
 \value{

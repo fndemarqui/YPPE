@@ -37,7 +37,7 @@ stan::io::program_reader prog_reader__() {
     reader.add_event(2, 0, "start", "/chunks/loglikspe.stan");
     reader.add_event(88, 86, "end", "/chunks/loglikspe.stan");
     reader.add_event(88, 3, "restart", "model_yppe");
-    reader.add_event(136, 49, "end", "model_yppe");
+    reader.add_event(131, 44, "end", "model_yppe");
     return reader;
 }
 template <typename T0__, typename T1__, typename T2__, typename T3__, typename T5__, typename T6__, typename T7__>
@@ -360,10 +360,10 @@ private:
         matrix_d Z;
         double tau;
         matrix_d ttt;
-        double mu_lambda;
+        double h1_gamma;
+        double h2_gamma;
         double mu_psi;
         double mu_phi;
-        double sigma_lambda;
         double sigma_psi;
         double sigma_phi;
         int approach;
@@ -474,30 +474,29 @@ public:
                 }
             }
             current_statement_begin__ = 99;
-            context__.validate_dims("data initialization", "mu_lambda", "double", context__.to_vec());
-            mu_lambda = double(0);
-            vals_r__ = context__.vals_r("mu_lambda");
+            context__.validate_dims("data initialization", "h1_gamma", "double", context__.to_vec());
+            h1_gamma = double(0);
+            vals_r__ = context__.vals_r("h1_gamma");
             pos__ = 0;
-            mu_lambda = vals_r__[pos__++];
+            h1_gamma = vals_r__[pos__++];
             current_statement_begin__ = 100;
+            context__.validate_dims("data initialization", "h2_gamma", "double", context__.to_vec());
+            h2_gamma = double(0);
+            vals_r__ = context__.vals_r("h2_gamma");
+            pos__ = 0;
+            h2_gamma = vals_r__[pos__++];
+            current_statement_begin__ = 101;
             context__.validate_dims("data initialization", "mu_psi", "double", context__.to_vec());
             mu_psi = double(0);
             vals_r__ = context__.vals_r("mu_psi");
             pos__ = 0;
             mu_psi = vals_r__[pos__++];
-            current_statement_begin__ = 101;
+            current_statement_begin__ = 102;
             context__.validate_dims("data initialization", "mu_phi", "double", context__.to_vec());
             mu_phi = double(0);
             vals_r__ = context__.vals_r("mu_phi");
             pos__ = 0;
             mu_phi = vals_r__[pos__++];
-            current_statement_begin__ = 102;
-            context__.validate_dims("data initialization", "sigma_lambda", "double", context__.to_vec());
-            sigma_lambda = double(0);
-            vals_r__ = context__.vals_r("sigma_lambda");
-            pos__ = 0;
-            sigma_lambda = vals_r__[pos__++];
-            check_greater_or_equal(function__, "sigma_lambda", sigma_lambda, 0);
             current_statement_begin__ = 103;
             context__.validate_dims("data initialization", "sigma_psi", "double", context__.to_vec());
             sigma_psi = double(0);
@@ -532,8 +531,8 @@ public:
             current_statement_begin__ = 111;
             validate_non_negative_index("phi", "q", q);
             num_params_r__ += q;
-            current_statement_begin__ = 113;
-            validate_non_negative_index("log_lambda", "m", m);
+            current_statement_begin__ = 112;
+            validate_non_negative_index("gamma", "m", m);
             num_params_r__ += m;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -586,22 +585,22 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable phi: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 113;
-        if (!(context__.contains_r("log_lambda")))
-            stan::lang::rethrow_located(std::runtime_error(std::string("Variable log_lambda missing")), current_statement_begin__, prog_reader__());
-        vals_r__ = context__.vals_r("log_lambda");
+        current_statement_begin__ = 112;
+        if (!(context__.contains_r("gamma")))
+            stan::lang::rethrow_located(std::runtime_error(std::string("Variable gamma missing")), current_statement_begin__, prog_reader__());
+        vals_r__ = context__.vals_r("gamma");
         pos__ = 0U;
-        validate_non_negative_index("log_lambda", "m", m);
-        context__.validate_dims("parameter initialization", "log_lambda", "vector_d", context__.to_vec(m));
-        Eigen::Matrix<double, Eigen::Dynamic, 1> log_lambda(m);
-        size_t log_lambda_j_1_max__ = m;
-        for (size_t j_1__ = 0; j_1__ < log_lambda_j_1_max__; ++j_1__) {
-            log_lambda(j_1__) = vals_r__[pos__++];
+        validate_non_negative_index("gamma", "m", m);
+        context__.validate_dims("parameter initialization", "gamma", "vector_d", context__.to_vec(m));
+        Eigen::Matrix<double, Eigen::Dynamic, 1> gamma(m);
+        size_t gamma_j_1_max__ = m;
+        for (size_t j_1__ = 0; j_1__ < gamma_j_1_max__; ++j_1__) {
+            gamma(j_1__) = vals_r__[pos__++];
         }
         try {
-            writer__.vector_unconstrain(log_lambda);
+            writer__.vector_lb_unconstrain(0, gamma);
         } catch (const std::exception& e) {
-            stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable log_lambda: ") + e.what()), current_statement_begin__, prog_reader__());
+            stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable gamma: ") + e.what()), current_statement_begin__, prog_reader__());
         }
         params_r__ = writer__.data_r();
         params_i__ = writer__.data_i();
@@ -642,48 +641,26 @@ public:
                 phi = in__.vector_constrain(q, lp__);
             else
                 phi = in__.vector_constrain(q);
-            current_statement_begin__ = 113;
-            Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> log_lambda;
-            (void) log_lambda;  // dummy to suppress unused var warning
+            current_statement_begin__ = 112;
+            Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> gamma;
+            (void) gamma;  // dummy to suppress unused var warning
             if (jacobian__)
-                log_lambda = in__.vector_constrain(m, lp__);
+                gamma = in__.vector_lb_constrain(0, m, lp__);
             else
-                log_lambda = in__.vector_constrain(m);
+                gamma = in__.vector_lb_constrain(0, m);
             // transformed parameters
-            current_statement_begin__ = 118;
-            validate_non_negative_index("lambda", "m", m);
-            Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> lambda(m);
-            stan::math::initialize(lambda, DUMMY_VAR__);
-            stan::math::fill(lambda, DUMMY_VAR__);
-            current_statement_begin__ = 119;
+            current_statement_begin__ = 117;
             validate_non_negative_index("loglik", "n", n);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> loglik(n);
             stan::math::initialize(loglik, DUMMY_VAR__);
             stan::math::fill(loglik, DUMMY_VAR__);
             // transformed parameters block statements
-            current_statement_begin__ = 120;
-            for (int k = 1; k <= m; ++k) {
-                current_statement_begin__ = 121;
-                stan::model::assign(lambda, 
-                            stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list()), 
-                            stan::math::exp(get_base1(log_lambda, k, "log_lambda", 1)), 
-                            "assigning variable lambda");
-            }
-            current_statement_begin__ = 123;
-            stan::math::assign(loglik, loglik1_pe(status, Z, tau, ttt, idt, lambda, psi, phi, pstream__));
+            current_statement_begin__ = 118;
+            stan::math::assign(loglik, loglik1_pe(status, Z, tau, ttt, idt, gamma, psi, phi, pstream__));
             // validate transformed parameters
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 118;
-            size_t lambda_j_1_max__ = m;
-            for (size_t j_1__ = 0; j_1__ < lambda_j_1_max__; ++j_1__) {
-                if (stan::math::is_uninitialized(lambda(j_1__))) {
-                    std::stringstream msg__;
-                    msg__ << "Undefined transformed parameter: lambda" << "(" << j_1__ << ")";
-                    stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable lambda: ") + msg__.str()), current_statement_begin__, prog_reader__());
-                }
-            }
-            current_statement_begin__ = 119;
+            current_statement_begin__ = 117;
             size_t loglik_j_1_max__ = n;
             for (size_t j_1__ = 0; j_1__ < loglik_j_1_max__; ++j_1__) {
                 if (stan::math::is_uninitialized(loglik(j_1__))) {
@@ -693,15 +670,15 @@ public:
                 }
             }
             // model body
-            current_statement_begin__ = 128;
+            current_statement_begin__ = 123;
             lp_accum__.add(loglik);
-            current_statement_begin__ = 129;
+            current_statement_begin__ = 124;
             if (as_bool(logical_eq(approach, 1))) {
-                current_statement_begin__ = 130;
-                lp_accum__.add(normal_log<propto__>(log_lambda, mu_lambda, sigma_lambda));
-                current_statement_begin__ = 131;
+                current_statement_begin__ = 125;
+                lp_accum__.add(lognormal_log<propto__>(gamma, h1_gamma, h2_gamma));
+                current_statement_begin__ = 126;
                 lp_accum__.add(normal_log<propto__>(psi, mu_psi, sigma_psi));
-                current_statement_begin__ = 132;
+                current_statement_begin__ = 127;
                 lp_accum__.add(normal_log<propto__>(phi, mu_phi, sigma_phi));
             }
         } catch (const std::exception& e) {
@@ -726,8 +703,7 @@ public:
         names__.resize(0);
         names__.push_back("psi");
         names__.push_back("phi");
-        names__.push_back("log_lambda");
-        names__.push_back("lambda");
+        names__.push_back("gamma");
         names__.push_back("loglik");
     }
     void get_dims(std::vector<std::vector<size_t> >& dimss__) const {
@@ -738,9 +714,6 @@ public:
         dimss__.push_back(dims__);
         dims__.resize(0);
         dims__.push_back(q);
-        dimss__.push_back(dims__);
-        dims__.resize(0);
-        dims__.push_back(m);
         dimss__.push_back(dims__);
         dims__.resize(0);
         dims__.push_back(m);
@@ -773,10 +746,10 @@ public:
         for (size_t j_1__ = 0; j_1__ < phi_j_1_max__; ++j_1__) {
             vars__.push_back(phi(j_1__));
         }
-        Eigen::Matrix<double, Eigen::Dynamic, 1> log_lambda = in__.vector_constrain(m);
-        size_t log_lambda_j_1_max__ = m;
-        for (size_t j_1__ = 0; j_1__ < log_lambda_j_1_max__; ++j_1__) {
-            vars__.push_back(log_lambda(j_1__));
+        Eigen::Matrix<double, Eigen::Dynamic, 1> gamma = in__.vector_lb_constrain(0, m);
+        size_t gamma_j_1_max__ = m;
+        for (size_t j_1__ = 0; j_1__ < gamma_j_1_max__; ++j_1__) {
+            vars__.push_back(gamma(j_1__));
         }
         double lp__ = 0.0;
         (void) lp__;  // dummy to suppress unused var warning
@@ -786,37 +759,20 @@ public:
         if (!include_tparams__ && !include_gqs__) return;
         try {
             // declare and define transformed parameters
-            current_statement_begin__ = 118;
-            validate_non_negative_index("lambda", "m", m);
-            Eigen::Matrix<double, Eigen::Dynamic, 1> lambda(m);
-            stan::math::initialize(lambda, DUMMY_VAR__);
-            stan::math::fill(lambda, DUMMY_VAR__);
-            current_statement_begin__ = 119;
+            current_statement_begin__ = 117;
             validate_non_negative_index("loglik", "n", n);
             Eigen::Matrix<double, Eigen::Dynamic, 1> loglik(n);
             stan::math::initialize(loglik, DUMMY_VAR__);
             stan::math::fill(loglik, DUMMY_VAR__);
             // do transformed parameters statements
-            current_statement_begin__ = 120;
-            for (int k = 1; k <= m; ++k) {
-                current_statement_begin__ = 121;
-                stan::model::assign(lambda, 
-                            stan::model::cons_list(stan::model::index_uni(k), stan::model::nil_index_list()), 
-                            stan::math::exp(get_base1(log_lambda, k, "log_lambda", 1)), 
-                            "assigning variable lambda");
-            }
-            current_statement_begin__ = 123;
-            stan::math::assign(loglik, loglik1_pe(status, Z, tau, ttt, idt, lambda, psi, phi, pstream__));
+            current_statement_begin__ = 118;
+            stan::math::assign(loglik, loglik1_pe(status, Z, tau, ttt, idt, gamma, psi, phi, pstream__));
             if (!include_gqs__ && !include_tparams__) return;
             // validate transformed parameters
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
             // write transformed parameters
             if (include_tparams__) {
-                size_t lambda_j_1_max__ = m;
-                for (size_t j_1__ = 0; j_1__ < lambda_j_1_max__; ++j_1__) {
-                    vars__.push_back(lambda(j_1__));
-                }
                 size_t loglik_j_1_max__ = n;
                 for (size_t j_1__ = 0; j_1__ < loglik_j_1_max__; ++j_1__) {
                     vars__.push_back(loglik(j_1__));
@@ -865,20 +821,14 @@ public:
             param_name_stream__ << "phi" << '.' << j_1__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t log_lambda_j_1_max__ = m;
-        for (size_t j_1__ = 0; j_1__ < log_lambda_j_1_max__; ++j_1__) {
+        size_t gamma_j_1_max__ = m;
+        for (size_t j_1__ = 0; j_1__ < gamma_j_1_max__; ++j_1__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "log_lambda" << '.' << j_1__ + 1;
+            param_name_stream__ << "gamma" << '.' << j_1__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
         if (!include_gqs__ && !include_tparams__) return;
         if (include_tparams__) {
-            size_t lambda_j_1_max__ = m;
-            for (size_t j_1__ = 0; j_1__ < lambda_j_1_max__; ++j_1__) {
-                param_name_stream__.str(std::string());
-                param_name_stream__ << "lambda" << '.' << j_1__ + 1;
-                param_names__.push_back(param_name_stream__.str());
-            }
             size_t loglik_j_1_max__ = n;
             for (size_t j_1__ = 0; j_1__ < loglik_j_1_max__; ++j_1__) {
                 param_name_stream__.str(std::string());
@@ -904,20 +854,14 @@ public:
             param_name_stream__ << "phi" << '.' << j_1__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
-        size_t log_lambda_j_1_max__ = m;
-        for (size_t j_1__ = 0; j_1__ < log_lambda_j_1_max__; ++j_1__) {
+        size_t gamma_j_1_max__ = m;
+        for (size_t j_1__ = 0; j_1__ < gamma_j_1_max__; ++j_1__) {
             param_name_stream__.str(std::string());
-            param_name_stream__ << "log_lambda" << '.' << j_1__ + 1;
+            param_name_stream__ << "gamma" << '.' << j_1__ + 1;
             param_names__.push_back(param_name_stream__.str());
         }
         if (!include_gqs__ && !include_tparams__) return;
         if (include_tparams__) {
-            size_t lambda_j_1_max__ = m;
-            for (size_t j_1__ = 0; j_1__ < lambda_j_1_max__; ++j_1__) {
-                param_name_stream__.str(std::string());
-                param_name_stream__ << "lambda" << '.' << j_1__ + 1;
-                param_names__.push_back(param_name_stream__.str());
-            }
             size_t loglik_j_1_max__ = n;
             for (size_t j_1__ = 0; j_1__ < loglik_j_1_max__; ++j_1__) {
                 param_name_stream__.str(std::string());

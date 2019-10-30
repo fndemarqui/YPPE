@@ -7,9 +7,8 @@
 \usage{
 yppe(formula, data, n_int = NULL, rho = NULL, tau = NULL,
   hessian = TRUE, approach = c("mle", "bayes"),
-  hyper_parms = list(mu_lambda = 0, sigma_lambda = 4, mu_psi = 0,
-  sigma_psi = 4, mu_phi = 0, sigma_phi = 4, mu_beta = 0, sigma_beta = 4),
-  ...)
+  hyper_parms = list(h1_gamma = 0, h2_gamma = 4, mu_psi = 0, sigma_psi =
+  4, mu_phi = 0, sigma_phi = 4, mu_beta = 0, sigma_beta = 4), ...)
 }
 \arguments{
 \item{formula}{an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted.}
