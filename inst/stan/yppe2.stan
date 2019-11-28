@@ -24,27 +24,62 @@ data{
   int<lower=0, upper=1> approach;
 }
 
+transformed data{
+  vector[q] z_mean;
+  vector[q] z_std;
+  matrix[n, q] Z_std;
+
+  vector[p] x_mean;
+  vector[p] x_std;
+  matrix[n, p] X_std;
+
+  for(j in 1:q){
+    z_mean[j] = mean(Z[,j]);
+    z_std[j] = sd(Z[,j]);
+    for(i in 1:n){
+      Z_std[i, j] = (Z[i, j] - z_mean[j])/z_std[j];
+    }
+  }
+
+  for(j in 1:p){
+    x_mean[j] = mean(X[,j]);
+    x_std[j] = sd(X[,j]);
+    for(i in 1:n){
+      X_std[i, j] = (X[i, j] - x_mean[j])/x_std[j];
+    }
+  }
+}
 
 parameters{
+  vector[q] psi_std;
+  vector[q] phi_std;
+  vector[p] beta_std;
+  vector<lower=0>[m] gamma_std;
+}
+
+transformed parameters{
+  vector[n] loglik;
   vector[q] psi;
   vector[q] phi;
   vector[p] beta;
   vector<lower=0>[m] gamma;
-}
+  real correction;
 
-
-transformed parameters{
-  vector[n] loglik;
-  loglik = loglik2_pe(status, Z, X, tau, ttt, idt, gamma, psi, phi, beta);
+  correction = exp( sum( ((psi_std + phi_std) .* z_mean) ./ z_std  +  beta_std .* x_mean ./ x_std) );
+  gamma = gamma_std*correction;
+  psi = psi_std ./ z_std;
+  phi = phi_std ./ z_std;
+  beta = beta_std ./ x_std;
+  loglik = loglik2_pe(status, Z, X, tau, ttt, idt, gamma_std, psi_std, phi_std, beta_std);
 }
 
 
 model{
   target += loglik;
   if(approach==1){
-    gamma ~ lognormal(h1_gamma, h2_gamma);
-    psi ~ normal(mu_psi, sigma_psi);
-    phi ~ normal(mu_phi, sigma_phi);
-    beta ~ normal(mu_beta, sigma_beta);
+    gamma_std ~ lognormal(h1_gamma, h2_gamma);
+    psi_std ~ normal(mu_psi, sigma_psi);
+    phi_std ~ normal(mu_phi, sigma_phi);
+    beta_std ~ normal(mu_beta, sigma_beta);
   }
 }

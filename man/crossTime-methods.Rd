@@ -4,8 +4,7 @@
 \alias{crossTime.yppe}
 \title{Computes the crossing survival times}
 \usage{
-\method{crossTime}{yppe}(object, newdata1, newdata2, conf.level = 0.95,
-  nboot = 4000, ...)
+\method{crossTime}{yppe}(object, newdata1, newdata2, conf.level = 0.95, nboot = 4000, ...)
 }
 \arguments{
 \item{object}{an object of class yppe}
