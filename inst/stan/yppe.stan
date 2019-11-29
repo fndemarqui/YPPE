@@ -51,7 +51,8 @@ transformed parameters{
   gamma = gamma_std*correction;
   psi = psi_std ./ z_std;
   phi = phi_std ./ z_std;
-  loglik = loglik1_pe(status, Z, tau, ttt, idt, gamma_std, psi_std, phi_std);
+  //loglik = loglik1_pe(status, Z, tau, ttt, idt, gamma_std, psi_std, phi_std);
+  loglik = loglik1_pe(status, Z, tau, ttt, idt, gamma, psi, phi);
 }
 
 

@@ -30,6 +30,9 @@ yppe.mle <- function(time, status, Z, n_int, rho, tau, hessian, ...) {
                            hessian=hessian, verbose=FALSE, ...)
 
   fit$par <- fit$par[-grep("loglik", names(fit$par))]
+  fit$par <- fit$par[-grep("_std", names(fit$par))]
+  fit$correction <- fit$par["correction"]
+  fit$par <- fit$par[-grep("correction", names(fit$par))]
   fit$theta_tilde <- fit$theta_tilde[-grep("loglik", names(fit$theta_tilde))]
 
   return(fit)
@@ -95,6 +98,7 @@ yppe2.mle <- function(time, status, Z, X, n_int, rho, tau, hessian, ...) {
                            hessian=hessian, verbose=FALSE, ...)
 
   fit$par <- fit$par[-grep("loglik", names(fit$par))]
+  fit$par <- fit$par[-grep("_std", names(fit$par))]
   fit$theta_tilde <- fit$theta_tilde[-grep("loglik", names(fit$theta_tilde))]
 
   return(fit)
@@ -192,16 +196,18 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   }
   time <- time/tau
 
-  if(is.null(n_int)){
-    n_int <- ceiling(sqrt(length(time)))
+  if(is.null(rho)){
+    rho <- timeGrid(time, status, n_int)
+    n_int <- length(rho) - 1
+  }else{
+    rho <- rho
+    n_int <- length(rho) - 1
   }
 
-  if(is.null(rho)){
-    rho <- timeGrid(time, status, n_int)/tau
-  }else{
-    rho <- rho/tau
-  }
-  n_int <- length(rho) - 1
+
+  # if(is.null(n_int)){
+  #   n_int <- ceiling(sqrt(length(time)))
+  # }
 
   if(approach=="mle"){
     if(p==0){
