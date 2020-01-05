@@ -2,6 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{coef}
 \alias{coef}
+\alias{coef.yppe}
 \title{Generic S3 method coef}
 \usage{
 coef(object, ...)

@@ -1,6 +1,6 @@
 
 #---------------------------------------------
-yppe.mle <- function(time, status, Z, n_int, rho, tau, hessian, ...) {
+yppe.mle <- function(time, status, Z, n_int, rho, tau, z_mean, z_sd, hessian, ...) {
 
   n <- nrow(Z)
   q <- ncol(Z)
@@ -19,6 +19,7 @@ yppe.mle <- function(time, status, Z, n_int, rho, tau, hessian, ...) {
 
   stan_data <- list(status=status, Z=Z, q=q, n=n, m=n_int,
                     tau=tau, ttt=ttt, approach=0, idt=idt,
+                    z_mean=z_mean, z_sd=z_sd,
                     h1_gamma=hyper_parms$h1_gamma,
                     h2_gamma=hyper_parms$h2_gamma,
                     mu_psi=hyper_parms$mu_psi,
@@ -29,17 +30,13 @@ yppe.mle <- function(time, status, Z, n_int, rho, tau, hessian, ...) {
   fit <- rstan::optimizing(stanmodels$yppe,data=stan_data,
                            hessian=hessian, verbose=FALSE, ...)
 
-  fit$par <- fit$par[-grep("loglik", names(fit$par))]
   fit$par <- fit$par[-grep("_std", names(fit$par))]
-  fit$correction <- fit$par["correction"]
-  fit$par <- fit$par[-grep("correction", names(fit$par))]
-  fit$theta_tilde <- fit$theta_tilde[-grep("loglik", names(fit$theta_tilde))]
 
   return(fit)
 }
 
 #---------------------------------------------
-yppe.bayes <- function(time, status, Z, n_int, rho, tau, hyper_parms, ...) {
+yppe.bayes <- function(time, status, Z, n_int, rho, tau, z_mean, z_sd, hyper_parms, ...) {
 
   n <- nrow(Z)
   q <- ncol(Z)
@@ -50,8 +47,10 @@ yppe.bayes <- function(time, status, Z, n_int, rho, tau, hyper_parms, ...) {
       ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
     }
   }
+
   stan_data <- list(status=status, Z=Z, q=q, n=n, m=n_int,
                     tau=tau, ttt=ttt, approach=1, idt=idt,
+                    z_mean=z_mean, z_sd=z_sd,
                     h1_gamma=hyper_parms$h1_gamma,
                     h2_gamma=hyper_parms$h2_gamma,
                     mu_psi=hyper_parms$mu_psi,
@@ -65,7 +64,8 @@ yppe.bayes <- function(time, status, Z, n_int, rho, tau, hyper_parms, ...) {
 }
 
 #---------------------------------------------
-yppe2.mle <- function(time, status, Z, X, n_int, rho, tau, hessian, ...) {
+yppe2.mle <- function(time, status, Z, X, n_int, rho, tau, z_mean, z_sd,
+                      x_mean, x_sd, hessian, ...) {
 
   n <- nrow(Z)
   q <- ncol(Z)
@@ -78,6 +78,7 @@ yppe2.mle <- function(time, status, Z, X, n_int, rho, tau, hessian, ...) {
     }
   }
 
+
   hyper_parms = list(h1_gamma=0, h2_gamma=4,
                      mu_psi=0, sigma_psi=4,
                      mu_phi=0, sigma_phi=4,
@@ -85,6 +86,8 @@ yppe2.mle <- function(time, status, Z, X, n_int, rho, tau, hessian, ...) {
 
   stan_data <- list(status=status, Z=Z, X=X, p=p, q=q, n=n, m=n_int,
                     tau=tau, ttt=ttt, approach=0, idt=idt,
+                    z_mean=z_mean, z_sd=z_sd,
+                    x_mean=x_mean, x_sd=x_sd,
                     h1_gamma=hyper_parms$h1_gamma,
                     h2_gamma=hyper_parms$h2_gamma,
                     mu_psi=hyper_parms$mu_psi,
@@ -97,15 +100,14 @@ yppe2.mle <- function(time, status, Z, X, n_int, rho, tau, hessian, ...) {
   fit <- rstan::optimizing(stanmodels$yppe2,data=stan_data,
                            hessian=hessian, verbose=FALSE, ...)
 
-  fit$par <- fit$par[-grep("loglik", names(fit$par))]
   fit$par <- fit$par[-grep("_std", names(fit$par))]
-  fit$theta_tilde <- fit$theta_tilde[-grep("loglik", names(fit$theta_tilde))]
 
   return(fit)
 }
 
 #---------------------------------------------
-yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, hyper_parms, ...) {
+yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, z_h, z_mean, z_sd,
+                        x_h, x_mean, x_sd, hyper_parms, ...) {
 
   n <- nrow(Z)
   q <- ncol(Z)
@@ -120,6 +122,8 @@ yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, hyper_parms, ...) {
 
   stan_data <- list(status=status, Z=Z, X=X, p=p, q=q, n=n, m=n_int,
                     tau=tau, ttt=ttt, approach=1, idt=idt,
+                    z_h=z_h, z_mean=z_mean, z_sd=z_sd,
+                    x_h=x_h, x_mean=x_mean, x_sd=x_sd,
                     h1_gamma=hyper_parms$h1_gamma,
                     h2_gamma=hyper_parms$h2_gamma,
                     mu_psi=hyper_parms$mu_psi,
@@ -130,7 +134,7 @@ yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, hyper_parms, ...) {
                     sigma_beta=hyper_parms$sigma_beta)
 
   fit <- rstan::sampling(stanmodels$yppe2, data=stan_data,
-                         verbose=FALSE, ...)
+                         verbose=FALSE, pars=c("psi", "phi", "beta","gamma", "loglik"), ...)
 
   return(fit)
 }
@@ -164,10 +168,10 @@ yppe2.bayes <- function(time, status, Z, X, n_int, rho, tau, hyper_parms, ...) {
 #'
 yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
                  approach = c("mle", "bayes"),
-                 hyper_parms = list(h1_gamma=0, h2_gamma=4,
-                                    mu_psi=0, sigma_psi=4,
-                                    mu_phi=0, sigma_phi=4,
-                                    mu_beta=0, sigma_beta=4), ...){
+                 hyper_parms = list(h1_gamma=0, h2_gamma=100,
+                                    mu_psi=0, sigma_psi=10,
+                                    mu_phi=0, sigma_phi=10,
+                                    mu_beta=0, sigma_beta=10), ...){
 
   approach <- match.arg(approach)
   formula <- Formula::Formula(formula)
@@ -181,15 +185,31 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   labels <- colnames(Z)[-1]
   labels.ph <- colnames(X)[-1]
   Z <- matrix(Z[,-1], ncol=length(labels))
-  if(ncol(X)>0){
-    labels.ph <- colnames(X)[-1]
-    X <- matrix(X[,-1], ncol=length(labels.ph))
-  }
 
   n <- nrow(Z)
   q <- ncol(Z)
   p <- ncol(X)
 
+  if(q==1){
+    z_mean <- as.array(c(mean(Z)))
+    z_sd <- as.array(c(sd(Z)))
+  }else{
+    z_mean <- apply(Z, 2, mean)
+    z_sd <- apply(Z, 2, sd)
+  }
+
+  if(ncol(X)>0){
+    X <- matrix(X[,-1], ncol=length(labels.ph))
+    p <- ncol(X)
+    if(p==1){
+      x_mean <- as.array(c(mean(X)))
+      x_sd <- as.array(c(sd(X)))
+    }
+    else{
+      x_mean <- apply(X, 2, mean)
+      x_sd <- apply(X, 2, sd)
+    }
+  }
 
   if(is.null(tau)){
     tau <- max(time)
@@ -200,10 +220,8 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
     rho <- timeGrid(time, status, n_int)
     n_int <- length(rho) - 1
   }else{
-    rho <- rho
     n_int <- length(rho) - 1
   }
-
 
   # if(is.null(n_int)){
   #   n_int <- ceiling(sqrt(length(time)))
@@ -212,17 +230,23 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   if(approach=="mle"){
     if(p==0){
       fit <- yppe.mle(time=time, status=status, Z=Z, n_int=n_int, rho=rho,
+                      z_mean=z_mean, z_sd=z_sd,
                       tau=tau, hessian=hessian, ...)
     }else{
       fit <- yppe2.mle(time=time, status=status, Z=Z, X=X, n_int=n_int, rho=rho,
+                       z_mean=z_mean, z_sd=z_sd,
+                       x_mean=x_mean, x_sd=x_sd,
                        tau=tau, hessian=hessian, ...)
     }
   }else{
     if(p==0){
       fit <- yppe.bayes(time=time, status=status, Z=Z, n_int=n_int, rho=rho,
+                        z_mean=z_mean, z_sd=z_sd,
                         tau=tau, hyper_parms=hyper_parms, ...)
     }else{
       fit <- yppe2.bayes(time=time, status=status, Z=Z, X=X, n_int=n_int, rho=rho,
+                         z_mean=z_mean, z_sd=z_sd,
+                         x_mean=x_mean, x_sd=x_sd,
                          tau=tau, hyper_parms=hyper_parms, ...)
     }
   }
@@ -242,11 +266,12 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   output$mf <- mf
   output$labels <- labels
   output$approach <- approach
+  output$z_sd <- z_sd
 
   if(p>0){
     output$labels.ph <- labels.ph
+    output$x_sd <- x_sd
   }
-
 
   class(output) <- "yppe"
   return(output)

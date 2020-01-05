@@ -28,28 +28,25 @@ vcov <- function(object, ...) UseMethod("vcov")
 vcov.yppe <- function(object, ...){
   p <- object$p
   q <- object$q
-  if(q==1){
-    std <- rep(sd(object$mf[,object$labels]),2)
+
+  if(p==0){
+    std <- with(object, rep(z_sd, 2))
   }else{
-    std <- rep(apply(object$mf[,object$labels], 2, sd), 2)
+    std <- with(object, c(rep(z_sd, 2), x_sd))
   }
-  if(p==1){
-    std <- c(std, sd(object$mf[,object$labels.ph]))
-  }else if(p>1){
-    std <- c(std, apply(object$mf[,object$labels], 2, sd))
-  }
-  std <- diag(std)
+
+  std <- diag(1/std)
   V <- MASS::ginv(-object$fit$hessian)[1:(2*q+p), 1:(2*q+p)]
   colnames(V) <- names(object$fit$par)[1:(2*q+p)]
   rownames(V) <- names(object$fit$par)[1:(2*q+p)]
   V <- std%*%V%*%std
-  #class(V) <- "vcov.yppe"
+  #class(V) <- "vcov.ypbp"
   return(V)
 }
 
 #---------------------------------------------
 #' Generic S3 method coef
-#' @aliases coef
+#' @aliases coef.yppe
 #' @export
 #' @param object a fitted model object
 #' @param ... further arguments passed to or from other methods.
@@ -80,7 +77,7 @@ coef.yppe <- function(object, ...){
 
 #---------------------------------------------
 #' Generic S3 method confint
-#' @aliases confint
+#' @aliases confint.yppe
 #' @export
 #' @param object a fitted model object
 #' @param ... further arguments passed to or from other methods.

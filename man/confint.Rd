@@ -2,6 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{confint}
 \alias{confint}
+\alias{confint.yppe}
 \title{Generic S3 method confint}
 \usage{
 confint(object, ...)

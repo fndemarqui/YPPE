@@ -77,10 +77,10 @@ summary.yppe <- function(object, ...){
     BIC <- -2*loglik + k*log(n)
 
     labels <- object$labels
-    coefficients <- object$fit$par[1:(2*q+p)]
-    vcov <- MASS::ginv(-object$fit$hessian)[1:(2*q+p),1:(2*q+p)]
+    coefficients <- coef(object)
+    V <- vcov(object)
 
-    se <- sqrt(diag(vcov))
+    se <- sqrt(diag(V))
     zval <- coefficients / se
     TAB <- cbind(Estimate = coefficients,
                  StdErr = se,
