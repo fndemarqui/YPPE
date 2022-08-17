@@ -5,14 +5,12 @@ yppeSurv <- function(time, z, par, rho, tau, n_int){
   psi <- par[1:q]
   phi <- par[(q+1):(2*q)]
   gamma <- par[(2*q+1):(2*q+n_int)]/tau
-  rho <- rho*tau
-  theta_S <- exp( as.numeric(z%*%psi) )
-  theta_L <- exp( as.numeric(z%*%phi) )
+  theta <- exp( as.numeric(z%*%phi) )
+  ratio <- exp( as.numeric(z%*%(psi-phi)) )
   Ht0 <- Hpexp(time, rho, gamma)
-  St0 <- exp(-Ht0)
-  Ft0 <- 1-St0
-  St <- exp( -theta_L*(log(theta_L*St0 + theta_S*Ft0)-(as.numeric(z%*%phi) - Ht0)  ) )
-  class(St) <- "survfit.yppe"
+  Rt0 = expm1(Ht0)
+  aux <- ratio*Rt0
+  St <- exp(-theta*log1p(aux))
   return(St)
 }
 
@@ -24,37 +22,24 @@ yppeSurv2 <- function(time, z, x, par, rho, tau, n_int){
   phi <- par[(q+1):(2*q)]
   beta <- par[(2*q+1):(2*q+p)]
   gamma <- par[(2*q+p+1):(2*q+p+n_int)]/tau
-  rho <- rho*tau
-  theta_S <- exp( as.numeric(z%*%psi) )
-  theta_L <- exp( as.numeric(z%*%phi) )
-  theta_C <- exp( as.numeric(x%*%beta) )
+  theta <- exp( as.numeric(z%*%phi) + as.numeric(x%*%beta) )
+  ratio <- exp( as.numeric(z%*%(psi-phi)) )
   Ht0 <- Hpexp(time, rho, gamma)
-  St0 <- exp(-Ht0)
-  Ft0 <- 1-St0
-  St <- exp( -theta_L*theta_C*(log(theta_L*St0 + theta_S*Ft0)-(as.numeric(z%*%phi) - Ht0)  ) )
+  Rt0 = expm1(Ht0)
+  aux <- ratio*Rt0
+  St <- exp(-theta*log1p(aux))
   class(St) <- "survfit.yppe"
   return(St)
 }
 
 #---------------------------------------------
-#' Generic S3 method survfit
-#' @aliases survfit
-#' @export
-#' @param object a fitted model object
-#' @param ... further arguments passed to or from other methods.
-#' @return the crossing survival time
-#'
-survfit <- function(object, ...) UseMethod("survfit")
-
-#---------------------------------------------
-#' Survival function for the YPPE model
+#' survfit method for yppe models
 #'
 #' @aliases survfit.yppe
-#' @rdname survfit-methods
-#' @method survfit yppe
+#' @description Computes the predicted survivor function for a yppe model.
+#' @importFrom survival survfit
 #' @export
-#' @export survfit
-#' @param object an object of the class yppe
+#' @param formula an object of the class yppe
 #' @param newdata a data frame containing the set of explanatory variables.
 #' @param ... further arguments passed to or from other methods.
 #' @return  a list containing the estimated survival probabilities.
@@ -64,27 +49,26 @@ survfit <- function(object, ...) UseMethod("survfit")
 #' library(YPPE)
 #' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
 #' summary(mle)
-#' ekm <- survfit(Surv(time, status)~arm, data=ipass)
+#' ekm <- survival::survfit(Surv(time, status)~arm, data=ipass)
 #' newdata <- data.frame(arm=0:1)
 #' St <- survfit(mle, newdata)
-#' time <- sort(ipass$time)
 #' plot(ekm, col=1:2)
-#' lines(time, St[[1]])
-#' lines(time, St[[2]], col=2)
+#' with(St, lines(time, surv[[1]]))
+#' with(St, lines(time, surv[[2]], col=2))
 #'
 #' # Bayesian approach:
 #' bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
 #' summary(bayes)
-#' ekm <- survfit(Surv(time, status)~arm, data=ipass)
+#' ekm <- survival::survfit(Surv(time, status)~arm, data=ipass)
 #' newdata <- data.frame(arm=0:1)
 #' St <- survfit(bayes, newdata)
-#' time <- sort(ipass$time)
 #' plot(ekm, col=1:2)
-#' lines(time, St[[1]])
-#' lines(time, St[[2]], col=2)
+#' with(St, lines(time, surv[[1]]))
+#' with(St, lines(time, surv[[2]], col=2))
 #' }
 #'
-survfit.yppe <- function(object, newdata, ...){
+survfit.yppe <- function(formula, newdata, ...){
+  object <- formula
   mf <- object$mf
   labels <- names(mf)[-1]
   time <- sort( stats::model.response(mf)[,1])
@@ -96,13 +80,14 @@ survfit.yppe <- function(object, newdata, ...){
   tau <- object$tau
   labels <- match.arg(names(newdata), labels, several.ok = TRUE)
   formula <- object$formula
-  Z <- as.matrix(stats::model.matrix(formula, data = newdata, rhs = 1)[,-1])
-  X <- suppressWarnings(try( as.matrix(stats::model.matrix(formula, data = newdata, rhs = 2)[,-1]), TRUE))
+  Z <- stats::model.matrix(formula, data = newdata, rhs = 1)[,-1, drop = FALSE]
+  X <- suppressWarnings(try( stats::model.matrix(formula, data = newdata, rhs = 2)[,-1, drop = FALSE], TRUE))
   St <- list()
 
 
   if(object$approach=="mle"){
-    par <- object$fit$par[-grep("log_", names(object$fit$par))]
+    #par <- object$fit$par[-grep("log_", names(object$fit$par))]
+    par <- object$fit$par
     if(object$p==0){
       for(i in 1:nrow(newdata)){
         St[[i]] <- yppeSurv(time, Z[i,], par, rho, tau, n_int)
@@ -130,8 +115,9 @@ survfit.yppe <- function(object, newdata, ...){
   }
 
 
-  class(St) <- "survfit.yppe"
-  return(St)
+  out <- list(time = time, surv = St)
+  class(out) <- "survfit.yppe"
+  return(out)
 }
 
 
@@ -155,7 +141,7 @@ yppeCrossSurv <- function(z1, z2, par, rho, tau0, tau, n_int){
   I <- c(tau0, 1.5*tau)
   t <- try(stats::uniroot(diffSurv, interval=I, z1=z1, z2=z2, par=par,
                           rho=rho, tau=tau, n_int=n_int)$root, TRUE)
-  if(class(t)=="try-error"){
+  if(is(t, "try-error")){
     return(NA)
   }else{
     return(t)
@@ -166,7 +152,7 @@ yppeCrossSurv2 <- function(z1, z2, x, par, rho, tau0, tau, n_int){
   I <- c(tau0, 1.5*tau)
   t <- try(stats::uniroot(diffSurv2, interval=I, z1=z1, z2=z2, x=x, par=par,
                           rho=rho, tau=tau, n_int=n_int)$root, TRUE)
-  if(class(t)=="try-error"){
+  if(is(t, "try-error")){
     return(NA)
   }else{
     return(t)
@@ -196,30 +182,29 @@ crossTime <- function(object, ...) UseMethod("crossTime")
 #' @param newdata1 a data frame containing the first set of explanatory variables
 #' @param newdata2 a data frame containing the second set of explanatory variables
 #' @param conf.level level of the confidence/credible intervals
-#' @param nboot number of bootstrap samples (default nboot=4000); ignored if approach="bayes".
+#' @param nboot number of bootstrap samples (default nboot=1000); ignored if approach="bayes".
 #' @param ... further arguments passed to or from other methods.
 #' @return  the crossing survival time
 #' @examples
 #' \donttest{
 #' # ML approach:
 #' library(YPPE)
-#' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+#' mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle", init = 0)
 #' summary(mle)
 #' newdata1 <- data.frame(arm=0)
 #' newdata2 <- data.frame(arm=1)
-#' tcross <- crossTime(mle, newdata1, newdata2)
+#' tcross <- crossTime(mle, newdata1, newdata2, nboot = 10)
 #' tcross
 #' ekm <- survfit(Surv(time, status)~arm, data=ipass)
 #' newdata <- data.frame(arm=0:1)
 #' St <- survfit(mle, newdata)
-#' time <- sort(ipass$time)
 #' plot(ekm, col=1:2)
-#' lines(time, St[[1]])
-#' lines(time, St[[2]], col=2)
+#' with(St, lines(time, surv[[1]]))
+#' with(St, lines(time, surv[[2]], col=2))
 #' abline(v=tcross, col="blue")
 #'
 #' # Bayesian approach:
-#' bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+#' bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes", chains=1, iter=10)
 #' summary(bayes)
 #' newdata1 <- data.frame(arm=0)
 #' newdata2 <- data.frame(arm=1)
@@ -228,19 +213,17 @@ crossTime <- function(object, ...) UseMethod("crossTime")
 #' ekm <- survfit(Surv(time, status)~arm, data=ipass)
 #' newdata <- data.frame(arm=0:1)
 #' St <- survfit(bayes, newdata)
-#' time <- sort(ipass$time)
 #' plot(ekm, col=1:2)
-#' lines(time, St[[1]])
-#' lines(time, St[[2]], col=2)
+#' with(St, lines(time, surv[[1]]))
+#' with(St, lines(time, surv[[2]], col=2))
 #' abline(v=tcross, col="blue")
 #' }
 #'
 crossTime.yppe <- function(object, newdata1, newdata2,
-                           conf.level=0.95, nboot=4000, ...){
+                           conf.level=0.95, nboot=1000, ...){
   q <-object$q
   p <-object$p
   mf <- object$mf
-  labels <- names(mf)[-1]
   time <- stats::model.response(mf)[,1]
   status <- stats::model.response(mf)[,2]
   o <- order(time)
@@ -252,10 +235,10 @@ crossTime.yppe <- function(object, newdata1, newdata2,
   tau <- object$tau
   labels <- match.arg(names(newdata1), names(newdata2), several.ok=TRUE)
   labels <- match.arg(names(mf)[-1], names(newdata1), several.ok=TRUE)
-  z1 <- matrix(stats::model.matrix(object$formula, data = newdata1, rhs = 1)[,-1], ncol=q)
-  z2 <- matrix(stats::model.matrix(object$formula, data = newdata2, rhs = 1)[,-1], ncol=q)
+  z1 <- stats::model.matrix(object$formula, data = newdata1, rhs = 1)[,-1, drop = FALSE]
+  z2 <- stats::model.matrix(object$formula, data = newdata2, rhs = 1)[,-1, drop = FALSE]
   if(p>0){
-    x <- matrix(stats::model.matrix(object$formula, data = newdata2, rhs = 2)[,-1], ncol=p)
+    x <- stats::model.matrix(object$formula, data = newdata2, rhs = 2)[,-1, drop = FALSE]
   }
 
   I <- c(tau0, 1.5*tau)
@@ -264,16 +247,16 @@ crossTime.yppe <- function(object, newdata1, newdata2,
 
   if(object$approach=="mle"){
     t <- c()
-    par <- object$fit$par[-grep("log_", names(object$fit$par))]
+    #par <- object$fit$par[-grep("log_", names(object$fit$par))]
+    par <- object$fit$par
     for(i in 1:nrow(newdata1)){
       if(p==0){
         t[i] <- yppeCrossSurv(z1=z1[i,], z2=z2[i,], par=par, rho=rho, tau0=tau0, tau=tau, n_int=n_int)
       }else{
-        t[i,] <- yppeCrossSurv2(z1=z1[i,], z2=z2[i,], x=x[i,], par=par, rho=rho, tau0=tau0, tau=tau, n_int=n_int)
+        t[i] <- yppeCrossSurv2(z1=z1[i,], z2=z2[i,], x=x[i,], par=par, rho=rho, tau0=tau0, tau=tau, n_int=n_int)
       }
     }
-    par <- with(object, yppeBoot(formula=formula, data=data, n_int=n_int,
-                                rho=rho, tau=tau, nboot=nboot, prob=prob))
+    par <- yppe_boot(object, nboot=nboot)
 
     ci <- matrix(nrow=nrow(newdata1), ncol=2)
     if(object$p==0){

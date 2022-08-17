@@ -3,7 +3,7 @@
 \name{yppe}
 \alias{yppe}
 \alias{{yppe}}
-\title{Fits the Yang and Prentice model with baseline distribution modelled by the piecewise exponential distribution.}
+\title{yppe: Fit the Yang and Prentice Regression Model with Piecewise Exponential baseline distribution.}
 \usage{
 yppe(
   formula,
@@ -13,8 +13,8 @@ yppe(
   tau = NULL,
   hessian = TRUE,
   approach = c("mle", "bayes"),
-  hyper_parms = list(h1_gamma = 0, h2_gamma = 100, mu_psi = 0, sigma_psi = 10, mu_phi =
-    0, sigma_phi = 10, mu_beta = 0, sigma_beta = 10),
+  hyper_parms = list(h1_gamma = 0, h2_gamma = 4, mu_psi = 0, sigma_psi = 4, mu_phi = 0,
+    sigma_phi = 4, mu_beta = 0, sigma_beta = 4),
   ...
 )
 }
@@ -41,7 +41,7 @@ yppe(
 yppe returns an object of class "yppe" containing the fitted model.
 }
 \description{
-Fits the Yang and Prentice model with baseline distribution modelled by the piecewise exponential distribution.
+yppe: Fit the Yang and Prentice Regression Model with Piecewise Exponential baseline distribution.
 }
 \examples{
 \donttest{

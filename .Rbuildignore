@@ -10,3 +10,11 @@
 ^cran-comments\.md$
 =======
 >>>>>>> 22c7cdb7c8f3a4851cd69c04cfa42a24b3bec811
+^inst/stuff$
+^doc$
+^Meta$
+^LICENSE\.md$
+^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

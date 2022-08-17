@@ -1,6 +1,6 @@
 #' The 'YPPE' package.
 #'
-#' @description Semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution curves. Details about the model can be found in Demarqui and Mayrink (2019) <arXiv:1910.02406>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
+#' @description Semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2021) <doi.org/10.1214/20-BJPS471>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
 #'
 #' @docType package
 #' @name YPPE-package
@@ -8,6 +8,7 @@
 #' @useDynLib YPPE, .registration = TRUE
 #' @import methods
 #' @import Rcpp
+#' @importFrom stats runif vcov
 #' @import survival
 #' @importFrom rstan sampling
 #'

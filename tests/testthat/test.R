@@ -11,10 +11,9 @@ tcross
 ekm <- survfit(Surv(time, status)~arm, data=ipass)
 newdata <- data.frame(arm=0:1)
 St <- survfit(mle, newdata)
-time <- sort(ipass$time)
 plot(ekm, col=1:2)
-lines(time, St[[1]])
-lines(time, St[[2]], col=2)
+with(St, lines(time, surv[[1]]))
+with(St, lines(time, surv[[2]], col=2))
 abline(v=tcross, col="blue")
 
 # Bayesian approach:
@@ -28,9 +27,8 @@ tcross
 ekm <- survfit(Surv(time, status)~arm, data=ipass)
 newdata <- data.frame(arm=0:1)
 St <- survfit(bayes, newdata)
-time <- sort(ipass$time)
 plot(ekm, col=1:2)
-lines(time, St[[1]])
-lines(time, St[[2]], col=2)
+with(St, lines(time, surv[[1]]))
+with(St, lines(time, surv[[2]], col=2))
 abline(v=tcross, col="blue")
 

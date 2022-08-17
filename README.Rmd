@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# YPPE
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The R package YPPE provides semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2019) <doi.org/10.1214/20-BJPS471>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
+
+## Installation
+
+You can install the released version of YPPE from [CRAN](https://CRAN.R-project.org) with:
+
+```{r, eval=FALSE}
+install.packages("YPPE")
+```
+
+
+And the development version from [GitHub](https://github.com/) with:
+
+```{r, eval=FALSE}
+install.packages("remotes")
+remotes::install_github("fndemarqui/YPPE")
+```
+
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(YPPE)
+
+data(gastric)
+
+# MLE approach:
+mle <- yppe(Surv(time, status)~trt, data=gastric, approach = "mle", init = 0)
+summary(mle)
+
+# Bayesian approach:
+bayes <- yppe(Surv(time, status)~trt, data=gastric, approach = "bayes", verbose = FALSE)
+summary(bayes)
+```
+

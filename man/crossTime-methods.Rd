@@ -4,7 +4,7 @@
 \alias{crossTime.yppe}
 \title{Computes the crossing survival times}
 \usage{
-\method{crossTime}{yppe}(object, newdata1, newdata2, conf.level = 0.95, nboot = 4000, ...)
+\method{crossTime}{yppe}(object, newdata1, newdata2, conf.level = 0.95, nboot = 1000, ...)
 }
 \arguments{
 \item{object}{an object of class yppe}
@@ -15,7 +15,7 @@
 
 \item{conf.level}{level of the confidence/credible intervals}
 
-\item{nboot}{number of bootstrap samples (default nboot=4000); ignored if approach="bayes".}
+\item{nboot}{number of bootstrap samples (default nboot=1000); ignored if approach="bayes".}
 
 \item{...}{further arguments passed to or from other methods.}
 }
@@ -29,23 +29,22 @@ Computes the crossing survival times
 \donttest{
 # ML approach:
 library(YPPE)
-mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle")
+mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle", init = 0)
 summary(mle)
 newdata1 <- data.frame(arm=0)
 newdata2 <- data.frame(arm=1)
-tcross <- crossTime(mle, newdata1, newdata2)
+tcross <- crossTime(mle, newdata1, newdata2, nboot = 10)
 tcross
 ekm <- survfit(Surv(time, status)~arm, data=ipass)
 newdata <- data.frame(arm=0:1)
 St <- survfit(mle, newdata)
-time <- sort(ipass$time)
 plot(ekm, col=1:2)
-lines(time, St[[1]])
-lines(time, St[[2]], col=2)
+with(St, lines(time, surv[[1]]))
+with(St, lines(time, surv[[2]], col=2))
 abline(v=tcross, col="blue")
 
 # Bayesian approach:
-bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes")
+bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes", chains=1, iter=10)
 summary(bayes)
 newdata1 <- data.frame(arm=0)
 newdata2 <- data.frame(arm=1)
@@ -54,10 +53,9 @@ tcross
 ekm <- survfit(Surv(time, status)~arm, data=ipass)
 newdata <- data.frame(arm=0:1)
 St <- survfit(bayes, newdata)
-time <- sort(ipass$time)
 plot(ekm, col=1:2)
-lines(time, St[[1]])
-lines(time, St[[2]], col=2)
+with(St, lines(time, surv[[1]]))
+with(St, lines(time, surv[[2]], col=2))
 abline(v=tcross, col="blue")
 }
 
