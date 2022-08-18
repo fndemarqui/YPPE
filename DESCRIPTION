@@ -4,7 +4,7 @@ Version: 1.1.0
 Authors@R: person(given = "Fabio", family = "Demarqui", email = "fndemarqui@est.ufmg.br", role = c("aut", "cre"))
 Description: Semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2021) <doi.org/10.1214/20-BJPS471>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
 License: AGPL (>= 3)
-URL: https://github.com/fndemarqui/YPPE
+URL: https://fndemarqui.github.io/YPPE/
 BugReports: https://github.com/fndemarqui/YPPE/issues
 Encoding: UTF-8
 LazyData: true

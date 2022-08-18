@@ -4,7 +4,6 @@ packrat/lib*/
 inst/stuff
 src
 inst/doc
-/doc/
 /Meta/
-docs
 src/stanExports_yppe.o
+/doc/
