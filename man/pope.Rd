@@ -46,11 +46,11 @@ pope: Fit Proportional Odds Regression Model with Piecewise Exponential baseline
 \donttest{
 # ML approach:
 library(YPPE)
-mle <- pope(Surv(time, status)~arm, data=ipass, approach="mle")
+mle <- pope(Surv(time, status)~arm, data=ipass, n_int=10, approach="mle")
 summary(mle)
 
 # Bayesian approach:
-bayes <- pope(Surv(time, status)~arm, data=ipass, approach="bayes")
+bayes <- pope(Surv(time, status)~arm, data=ipass, n_int=10, approach="bayes")
 summary(bayes)
 }
 

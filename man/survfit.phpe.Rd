@@ -23,7 +23,7 @@ Computes the predicted survivor function for a phpe model.
 \donttest{
 # ML approach:
 library(YPPE)
-mle <- phpe(Surv(time, status)~arm, data=ipass, approach="mle", init = 0)
+mle <- phpe(Surv(time, status)~arm, data=ipass, n_int=10, approach="mle", init = 0)
 summary(mle)
 ekm <- survival::survfit(Surv(time, status)~arm, data=ipass)
 newdata <- data.frame(arm=0:1)
@@ -33,7 +33,7 @@ with(St, lines(time, surv[[1]]))
 with(St, lines(time, surv[[2]], col=2))
 
 # Bayesian approach:
-bayes <- phpe(Surv(time, status)~arm, data=ipass, approach="bayes")
+bayes <- phpe(Surv(time, status)~arm, data=ipass, n_int=10, approach="bayes")
 summary(bayes)
 ekm <- survival::survfit(Surv(time, status)~arm, data=ipass)
 newdata <- data.frame(arm=0:1)

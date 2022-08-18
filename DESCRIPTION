@@ -13,12 +13,15 @@ Depends:
     R (>= 3.4.0),
     survival
 Imports: 
+    dplyr,
     methods,
     MASS,
     Formula,
     Rcpp (>= 0.12.0),
+    Rdpack,
     rstan (>= 2.18.1),
     rstantools (>= 2.0.0)
+RdMacros: Rdpack
 LinkingTo: 
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),

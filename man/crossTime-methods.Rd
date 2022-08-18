@@ -29,7 +29,7 @@ Computes the crossing survival times
 \donttest{
 # ML approach:
 library(YPPE)
-mle <- yppe(Surv(time, status)~arm, data=ipass, approach="mle", init = 0)
+mle <- yppe(Surv(time, status)~arm, data=ipass, n_int=10, approach="mle", init = 0)
 summary(mle)
 newdata1 <- data.frame(arm=0)
 newdata2 <- data.frame(arm=1)
@@ -44,7 +44,7 @@ with(St, lines(time, surv[[2]], col=2))
 abline(v=tcross, col="blue")
 
 # Bayesian approach:
-bayes <- yppe(Surv(time, status)~arm, data=ipass, approach="bayes", chains=1, iter=10)
+bayes <- yppe(Surv(time, status)~arm, data=ipass, n_int=10, approach="bayes", chains=1, iter=10)
 summary(bayes)
 newdata1 <- data.frame(arm=0)
 newdata2 <- data.frame(arm=1)
