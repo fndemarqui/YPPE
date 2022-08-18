@@ -47,11 +47,15 @@ library(YPPE)
 data(gastric)
 
 # MLE approach:
-mle <- yppe(Surv(time, status)~trt, data=gastric, approach = "mle", init = 0)
+mle <- yppe(Surv(time, status)~trt, data=gastric, 
+            approach = "mle", init = 0, n_int = 10)
 summary(mle)
 
 # Bayesian approach:
-bayes <- yppe(Surv(time, status)~trt, data=gastric, approach = "bayes", verbose = FALSE)
+bayes <- yppe(Surv(time, status)~trt, data=gastric, 
+              approach = "bayes", n_int = 10, 
+              refresh = FALSE)
+
 summary(bayes)
 ```
 

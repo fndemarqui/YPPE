@@ -31,7 +31,7 @@ rYP <- function(u, Z, psi, phi, gamma, baseline){
 #'
 rsurv <- function(formula, covariates,
                       baseline = "weibull",
-                      gamma, psi = NULL, phi = NULL, nu = NULL, max_fu){
+                      gamma, psi = NULL, phi = NULL, max_fu){
   formula <- Formula::Formula(formula)
   mf <- stats::model.frame(formula=formula, data=covariates)
   Z <- stats::model.matrix(formula, data = mf, rhs = 1)[,-1, drop = FALSE]

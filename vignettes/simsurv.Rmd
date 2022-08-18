@@ -49,9 +49,9 @@ simdata <- rsurv(
   max_fu = 5
 )
 
-ph <- phpe(Surv(time, status)~trt+age, data = simdata, init = 0)
-po <- pope(Surv(time, status)~trt+age, data = simdata, init = 0)
-yp <- yppe(Surv(time, status)~trt+age, data = simdata, init = 0)
+ph <- phpe(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
+po <- pope(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
+yp <- yppe(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
 anova(ph, po, yp)
 
 ```
@@ -70,9 +70,9 @@ simdata <- rsurv(
   max_fu = 5
 )
 
-ph <- phpe(Surv(time, status)~trt+age, data = simdata, init = 0)
-po <- pope(Surv(time, status)~trt+age, data = simdata, init = 0)
-yp <- yppe(Surv(time, status)~trt+age, data = simdata, init = 0)
+ph <- phpe(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
+po <- pope(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
+yp <- yppe(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
 anova(ph, po, yp)
 
 ```
@@ -90,9 +90,9 @@ simdata <- rsurv(
   max_fu = 5
 )
 
-ph <- phpe(Surv(time, status)~trt+age, data = simdata, init = 0)
-po <- pope(Surv(time, status)~trt+age, data = simdata, init = 0)
-yp <- yppe(Surv(time, status)~trt+age, data = simdata, init = 0)
+ph <- phpe(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
+po <- pope(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
+yp <- yppe(Surv(time, status)~trt+age, data = simdata, n_int = 10, init = 0)
 anova(ph, po, yp)
 
 ```

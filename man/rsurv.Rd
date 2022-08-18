@@ -11,7 +11,6 @@ rsurv(
   gamma,
   psi = NULL,
   phi = NULL,
-  nu = NULL,
   max_fu
 )
 }

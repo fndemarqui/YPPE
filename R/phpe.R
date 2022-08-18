@@ -62,11 +62,11 @@ phpe_fit <- function(time, status, Z, X, n_int, rho, tau,
 #' \donttest{
 #' # ML approach:
 #' library(YPPE)
-#' mle <- phpe(Surv(time, status)~arm, data=ipass, approach="mle")
+#' mle <- phpe(Surv(time, status)~arm, data=ipass, n_int=10, approach="mle")
 #' summary(mle)
 #'
 #' # Bayesian approach:
-#' bayes <- phpe(Surv(time, status)~arm, data=ipass, approach="bayes")
+#' bayes <- phpe(Surv(time, status)~arm, data=ipass, n_int=10, approach="bayes")
 #' summary(bayes)
 #' }
 #'

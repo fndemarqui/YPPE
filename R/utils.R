@@ -34,7 +34,7 @@ vcov.yppe <- function(object, ...){
 #' @return  the estimated regression coefficients.
 #' @examples
 #' \dontrun{
-#' fit <- yppe(Surv(time, status)~arm, data=ipass)
+#' fit <- yppe(Surv(time, status)~arm, data=ipass, init = 0)
 #' coef(fit)
 #' }
 #'

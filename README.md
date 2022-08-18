@@ -41,141 +41,45 @@ library(YPPE)
 data(gastric)
 
 # MLE approach:
-mle <- yppe(Surv(time, status)~trt, data=gastric, approach = "mle", init = 0)
+mle <- yppe(Surv(time, status)~trt, data=gastric, 
+            approach = "mle", init = 0, n_int = 10)
 summary(mle)
 #> Call:
-#> yppe(formula = Surv(time, status) ~ trt, data = gastric, approach = "mle", 
-#>     init = 0)
+#> yppe(formula = Surv(time, status) ~ trt, data = gastric, n_int = 10, 
+#>     approach = "mle", init = 0)
 #> 
 #> Short-term coefficients:
-#>     Estimate StdErr z.value  p.value   
-#> trt   1.8373 0.6483   2.834 0.004597 **
+#>     Estimate  StdErr z.value  p.value   
+#> trt  1.77113 0.61843  2.8639 0.004185 **
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> Long-term coefficients:
 #>     Estimate   StdErr z.value   p.value    
-#> trt -1.01753  0.30036 -3.3877 0.0007049 ***
+#> trt -0.98230  0.29576 -3.3213 0.0008961 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> --- 
-#> loglik = 47.65404   AIC = 62.69192
+#> loglik = 6.751216   AIC = 10.49757
 
 # Bayesian approach:
-bayes <- yppe(Surv(time, status)~trt, data=gastric, approach = "bayes", verbose = FALSE)
-#> 
-#> SAMPLING FOR MODEL 'yppe' NOW (CHAIN 1).
-#> Chain 1: 
-#> Chain 1: Gradient evaluation took 0.001536 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 15.36 seconds.
-#> Chain 1: Adjust your expectations accordingly!
-#> Chain 1: 
-#> Chain 1: 
-#> Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-#> Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#> Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#> Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#> Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#> Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#> Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#> Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#> Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#> Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-#> Chain 1: 
-#> Chain 1:  Elapsed Time: 27.8873 seconds (Warm-up)
-#> Chain 1:                25.3193 seconds (Sampling)
-#> Chain 1:                53.2066 seconds (Total)
-#> Chain 1: 
-#> 
-#> SAMPLING FOR MODEL 'yppe' NOW (CHAIN 2).
-#> Chain 2: 
-#> Chain 2: Gradient evaluation took 0.001448 seconds
-#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 14.48 seconds.
-#> Chain 2: Adjust your expectations accordingly!
-#> Chain 2: 
-#> Chain 2: 
-#> Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-#> Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#> Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#> Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#> Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#> Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#> Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#> Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#> Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#> Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-#> Chain 2: 
-#> Chain 2:  Elapsed Time: 27.8573 seconds (Warm-up)
-#> Chain 2:                24.9122 seconds (Sampling)
-#> Chain 2:                52.7695 seconds (Total)
-#> Chain 2: 
-#> 
-#> SAMPLING FOR MODEL 'yppe' NOW (CHAIN 3).
-#> Chain 3: 
-#> Chain 3: Gradient evaluation took 0.001441 seconds
-#> Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 14.41 seconds.
-#> Chain 3: Adjust your expectations accordingly!
-#> Chain 3: 
-#> Chain 3: 
-#> Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-#> Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#> Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#> Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#> Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#> Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#> Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#> Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#> Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#> Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-#> Chain 3: 
-#> Chain 3:  Elapsed Time: 26.8641 seconds (Warm-up)
-#> Chain 3:                25.2976 seconds (Sampling)
-#> Chain 3:                52.1617 seconds (Total)
-#> Chain 3: 
-#> 
-#> SAMPLING FOR MODEL 'yppe' NOW (CHAIN 4).
-#> Chain 4: 
-#> Chain 4: Gradient evaluation took 0.001508 seconds
-#> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 15.08 seconds.
-#> Chain 4: Adjust your expectations accordingly!
-#> Chain 4: 
-#> Chain 4: 
-#> Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-#> Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#> Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#> Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#> Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#> Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#> Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#> Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#> Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#> Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-#> Chain 4: 
-#> Chain 4:  Elapsed Time: 27.2158 seconds (Warm-up)
-#> Chain 4:                25.2288 seconds (Sampling)
-#> Chain 4:                52.4446 seconds (Total)
-#> Chain 4:
+bayes <- yppe(Surv(time, status)~trt, data=gastric, 
+              approach = "bayes", n_int = 10, 
+              refresh = FALSE)
+
 summary(bayes)
 #> Call:
-#> yppe(formula = Surv(time, status) ~ trt, data = gastric, approach = "bayes", 
-#>     verbose = FALSE)
+#> yppe(formula = Surv(time, status) ~ trt, data = gastric, n_int = 10, 
+#>     approach = "bayes", refresh = FALSE)
 #> 
 #> Short-term coefficients:
-#>      mean se_mean    sd 2.5%  25%   50%   75% 97.5%    n_eff  Rhat
-#> trt 1.843   0.014 0.612  0.7 1.42 1.827 2.226 3.144 2019.152 1.001
+#>      mean se_mean    sd  2.5%  25%   50%   75% 97.5%    n_eff  Rhat
+#> trt 1.817   0.014 0.628 0.681 1.38 1.776 2.215 3.093 1918.249 1.001
 #> 
 #> Long-term coefficients:
-#>       mean se_mean   sd   2.5%   25%    50%    75%  97.5%  n_eff Rhat
-#> trt -0.938   0.005 0.32 -1.526 -1.16 -0.955 -0.733 -0.277 3545.9    1
+#>       mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff Rhat
+#> trt -0.965   0.006 0.305 -1.538 -1.177 -0.965 -0.766 -0.336 2491.661    1
 #> 
 #> --- 
 #> Inference for Stan model: yppe.

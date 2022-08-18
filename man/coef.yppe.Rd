@@ -19,7 +19,7 @@ This function returns the estimated regression coefficients when the maximum lik
 }
 \examples{
 \dontrun{
-fit <- yppe(Surv(time, status)~arm, data=ipass)
+fit <- yppe(Surv(time, status)~arm, data=ipass, init = 0)
 coef(fit)
 }
 
