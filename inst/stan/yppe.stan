@@ -27,18 +27,11 @@ data{
 
 
 parameters{
-  vector[q] psi;
-  vector[q] phi;
+  vector[q == 0 ? 0 : q] psi;
+  vector[q == 0 ? 0 : q] phi;
   vector[p == 0 ? 0 : p] beta;
   vector<lower=0>[m] gamma;
 }
-
-
-// transformed parameters{
-//   vector[n] loglik;
-//   loglik = loglik1_pe(status, Z, tau, ttt, idt, gamma, psi, phi);
-// }
-
 
 model{
   vector[n] loglik;
@@ -62,9 +55,11 @@ model{
   }else if(survreg == 3){
     lp_const = X*beta;
     loglik = loglik_ph(status, lht0, Ht0, lp_const, n, p);
-  }else{
+  }else if(survreg == 4){
     lp_const = X*beta;
     loglik = loglik_po(status, lht0, Ht0, lp_const, n, p);
+  }else{
+    loglik = status .* lht0 - Ht0;
   }
 
   target += sum(loglik);
@@ -75,3 +70,5 @@ model{
     beta ~ normal(mu_beta, sigma_beta);
   }
 }
+
+

@@ -64,6 +64,12 @@
     <loc>/reference/model.matrix.yppe.html</loc>
   </url>
   <url>
+    <loc>/reference/pehaz.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pexp.html</loc>
+  </url>
+  <url>
     <loc>/reference/phpe.html</loc>
   </url>
   <url>
@@ -77,6 +83,18 @@
   </url>
   <url>
     <loc>/reference/print.summary.yppe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rates.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rates.phpe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rates.pope.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rates.yppe.html</loc>
   </url>
   <url>
     <loc>/reference/rsurv.html</loc>

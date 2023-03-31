@@ -3,16 +3,17 @@
 yppe_fit <- function(time, status, Z, X, n_int, rho, tau,
                      hyper_parms, survreg, approach, hessian, ...) {
 
-  n <- nrow(Z)
+  n <- length(time)
   q <- ncol(Z)
   p <- ncol(X)
   idt <- as.numeric(cut(time, rho, include.lowest = TRUE))
-  ttt <- matrix(nrow=n, ncol=n_int)
-  for(i in 1:n){
-    for(j in 1:n_int){
-      ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
-    }
-  }
+  ttt <- TTT(time, rho)
+  # ttt <- matrix(nrow=n, ncol=n_int)
+  # for(i in 1:n){
+  #   for(j in 1:n_int){
+  #     ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
+  #   }
+  # }
 
   approach <- ifelse(approach=="mle", 0, 1)
   stan_data <- list(status=status, Z=Z, X=X, p=p, q=q, n=n, m=n_int,
@@ -93,12 +94,13 @@ yppe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
     X <- array(0, dim = c(0, 0))
   }
 
-  n <- nrow(Z)
+  n <- length(time)
   q <- ncol(Z)
   p <- ncol(X)
 
-
-  if(p==0){
+  if(p == 0 & q == 0){
+    survreg <- 0
+  }else if(p==0){
     survreg <- 1
   }else{
     survreg = 2

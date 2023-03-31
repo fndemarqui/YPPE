@@ -74,12 +74,12 @@ summary(bayes)
 #>     approach = "bayes", refresh = FALSE)
 #> 
 #> Short-term coefficients:
-#>      mean se_mean    sd 2.5%   25%   50%   75% 97.5%    n_eff Rhat
-#> trt 1.813   0.015 0.639 0.64 1.366 1.796 2.225 3.101 1808.444    1
+#>      mean se_mean    sd  2.5%   25%   50%   75% 97.5%   n_eff  Rhat
+#> trt 1.802   0.015 0.636 0.659 1.356 1.761 2.221 3.095 1779.25 1.001
 #> 
 #> Long-term coefficients:
-#>       mean se_mean    sd   2.5%    25%    50%    75% 97.5%    n_eff Rhat
-#> trt -0.969   0.007 0.324 -1.552 -1.181 -0.988 -0.771 -0.26 2421.876    1
+#>       mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff  Rhat
+#> trt -0.959   0.006 0.309 -1.535 -1.166 -0.967 -0.757 -0.313 2379.755 1.002
 #> 
 #> --- 
 #> Inference for Stan model: yppe.

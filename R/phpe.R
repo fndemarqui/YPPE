@@ -3,16 +3,17 @@
 phpe_fit <- function(time, status, Z, X, n_int, rho, tau,
                      hyper_parms, survreg, approach, hessian, ...) {
 
-  n <- nrow(X)
+  n <- length(time)
   p <- ncol(X)
   q <- ncol(Z)
   idt <- as.numeric(cut(time, rho, include.lowest = TRUE))
-  ttt <- matrix(nrow=n, ncol=n_int)
-  for(i in 1:n){
-    for(j in 1:n_int){
-      ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
-    }
-  }
+  ttt <- TTT(time, rho)
+  # ttt <- matrix(nrow=n, ncol=n_int)
+  # for(i in 1:n){
+  #   for(j in 1:n_int){
+  #     ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
+  #   }
+  # }
 
 
   hyper_parms$mu_psi=0
@@ -84,15 +85,19 @@ phpe <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   status <- resp[,2]
   X <- stats::model.matrix(formula, data = mf, rhs = 1)
   labels <- colnames(X)[-1]
-  X <- matrix(X[,-1], ncol=length(labels))
+  X <- matrix(X[,-1, drop = FALSE], ncol=length(labels))
   Z <- array(0, dim = c(0, 0))
 
-  n <- nrow(Z)
+  n <- length(time)
   q <- ncol(Z)
   p <- ncol(X)
 
+  if(p > 0){
+    survreg <- 3
+  }else{
+    survreg <- 0
+  }
 
-  survreg <- 3
 
 
   if(is.null(tau)){

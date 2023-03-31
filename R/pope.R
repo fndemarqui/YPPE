@@ -3,16 +3,17 @@
 pope_fit <- function(time, status, Z, X, n_int, rho, tau,
                      hyper_parms, survreg, approach, hessian, ...) {
 
-  n <- nrow(X)
+  n <- length(time)
   p <- ncol(X)
   q <- ncol(Z)
   idt <- as.numeric(cut(time, rho, include.lowest = TRUE))
-  ttt <- matrix(nrow=n, ncol=n_int)
-  for(i in 1:n){
-    for(j in 1:n_int){
-      ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
-    }
-  }
+  ttt <- TTT(time, rho)
+  # ttt <- matrix(nrow=n, ncol=n_int)
+  # for(i in 1:n){
+  #   for(j in 1:n_int){
+  #     ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
+  #   }
+  # }
 
 
   hyper_parms$mu_psi=0
@@ -92,7 +93,11 @@ pope <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   p <- ncol(X)
 
 
-  survreg <- 4
+  if(p > 0){
+    survreg <- 4
+  }else{
+    survreg <- 0
+  }
 
 
   if(is.null(tau)){

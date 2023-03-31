@@ -1,4 +1,16 @@
 
+TTT <- function(time, rho){
+  n <- length(time)
+  n_int <- length(rho) - 1
+  ttt <- matrix(nrow = n, ncol = n_int)
+  for(i in 1:n){
+    for(j in 1:n_int){
+      ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
+    }
+  }
+  return(ttt)
+}
+
 
 
 #---------------------------------------------
@@ -179,4 +191,81 @@ logLik.yppe <- function(object, ...){
 }
 
 
+#---------------------------------------------
+#' Generic S3 method rates
+#' @export
+#' @param object a fitted model object.
+#' @details Method only available for ML approach.
+#' @param ... further arguments passed to or from other methods.
+#' @return the estimated failure rates for the PE distribution.
+#'
+rates <- function(object, ...) UseMethod("rates")
+
+#' Estimated failure rates for the PE distribution
+#' @aliases rates.phpe
+#' @export
+#' @details Method only available for ML approach.
+#' @param object a fitted model object.
+#' @param ... further arguments passed to or from other methods.
+#' @return the estimated failure rates for the PE distribution.
+#'
+rates.phpe <- function(object, ...){
+  if(object$approach != "mle"){
+    warning("Method only available for ML approach")
+  }else{
+    p <- object$p
+    rho <- object$rho
+    m <- length(rho) - 1
+    tau <- object$tau
+    par <- object$fit$par
+    rates <- par[(p+1):(p+m)]/tau
+    return(rates)
+  }
+}
+
+#' Estimated failure rates for the PE distribution
+#' @aliases rates.pope
+#' @export
+#' @details Method only available for ML approach.
+#' @param object a fitted model object.
+#' @param ... further arguments passed to or from other methods.
+#' @return the estimated failure rates for the PE distribution.
+#'
+rates.pope <- function(object, ...){
+  if(object$approach != "mle"){
+    warning("Method only available for ML approach")
+  }else{
+    p <- object$p
+    rho <- object$rho
+    m <- length(rho) - 1
+    tau <- object$tau
+    par <- object$fit$par
+    rates <- par[(p+1):(p+m)]/tau
+    return(rates)
+  }
+
+}
+
+#' Estimated failure rates for the PE distribution
+#' @aliases rates.yppe
+#' @export
+#' @details Method only available for ML approach.
+#' @param object a fitted model object.
+#' @param ... further arguments passed to or from other methods.
+#' @return the estimated failure rates for the PE distribution.
+#'
+rates.yppe <- function(object, ...){
+  if(object$approach != "mle"){
+    warning("Method only available for ML approach")
+  }else{
+    p <- object$p
+    q <- object$q
+    rho <- object$rho
+    m <- length(rho) - 1
+    tau <- object$tau
+    par <- object$fit$par
+    rates <- par[(2*q+p+1):(2*q+p+m)]/tau
+    return(rates)
+  }
+}
 
