@@ -265,6 +265,7 @@ rates.yppe <- function(object, ...){
     tau <- object$tau
     par <- object$fit$par
     rates <- par[(2*q+p+1):(2*q+p+m)]/tau
+    names(rates) <- NULL
     return(rates)
   }
 }
