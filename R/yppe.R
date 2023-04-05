@@ -32,6 +32,8 @@ yppe_fit <- function(time, status, Z, X, n_int, rho, tau,
     fit <- rstan::optimizing(stanmodels$yppe,data=stan_data,
                              hessian=hessian, ...)
 
+    fit$value <- fit$value - sum(status)*log(tau)
+
     # fit$par <- fit$par[-grep("loglik", names(fit$par))]
     # fit$theta_tilde <- fit$theta_tilde[-grep("loglik", names(fit$theta_tilde))]
   }else{

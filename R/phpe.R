@@ -37,6 +37,7 @@ phpe_fit <- function(time, status, Z, X, n_int, rho, tau,
   if(approach == 0){
     fit <- rstan::optimizing(stanmodels$yppe,data=stan_data,
                              hessian=hessian, ...)
+    fit$value <- fit$value - sum(status)*log(tau)
   }else{
     fit <- rstan::sampling(stanmodels$yppe, data=stan_data, ...)
   }
