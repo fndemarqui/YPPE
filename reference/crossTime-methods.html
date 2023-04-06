@@ -111,13 +111,13 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Short-term coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Estimate  StdErr z.value   p.value    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm  1.04164 0.16656  6.2539 4.004e-10 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arm  1.04152 0.16656  6.2533 4.019e-10 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Long-term coefficients:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate    StdErr z.value   p.value    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm -1.238455  0.084558 -14.646 &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Estimate   StdErr z.value   p.value    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arm -1.23838  0.08456 -14.645 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -128,7 +128,7 @@
 <span class="r-in"><span><span class="va">tcross</span> <span class="op">&lt;-</span> <span class="fu"><a href="crossTime.html">crossTime</a></span><span class="op">(</span><span class="va">mle</span>, <span class="va">newdata1</span>, <span class="va">newdata2</span>, nboot <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">tcross</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Est. 2.5% 97.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.883346   NA    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.883294   NA    NA</span>
 <span class="r-in"><span><span class="va">ekm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span><span class="op">~</span><span class="va">arm</span>, data<span class="op">=</span><span class="va">ipass</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>arm<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">St</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="va">mle</span>, <span class="va">newdata</span><span class="op">)</span></span></span>
@@ -143,8 +143,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'yppe' NOW (CHAIN 1).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 0.000687 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 6.87 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 0.000552 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 5.52 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
@@ -162,17 +162,14 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 9 / 10 [ 90%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 10 / 10 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.010373 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.013981 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.024354 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.009927 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.014115 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.024042 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 1 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 1 chains where the estimated Bayesian Fraction of Missing Information was low. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bfmi-low</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The largest R-hat is Inf, indicating chains have not mixed.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The largest R-hat is 2.5, indicating chains have not mixed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#r-hat</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">bayes</span><span class="op">)</span></span></span>
@@ -181,12 +178,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     approach = "bayes", chains = 1, iter = 10)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Short-term coefficients:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      mean se_mean    sd  2.5%   25%   50%   75% 97.5% n_eff Rhat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm 0.391   0.094 0.176 0.255 0.266 0.266 0.584 0.584 3.495  Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      mean se_mean    sd  2.5%   25%   50%   75% 97.5% n_eff  Rhat</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arm 0.502   0.027 0.051 0.426 0.504 0.517 0.517 0.551 3.495 1.158</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Long-term coefficients:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm -0.647   0.252 0.45 -1.137 -1.137 -0.404 -0.279 -0.279  3.19  Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       mean se_mean    sd   2.5%    25%    50%    75%  97.5% n_eff  Rhat</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arm -0.963   0.076 0.142 -1.107 -1.107 -0.926 -0.894 -0.792 3.461 3.454</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Stan model: yppe.</span>
@@ -197,8 +194,8 @@
 <span class="r-in"><span><span class="va">newdata2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>arm<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">tcross</span> <span class="op">&lt;-</span> <span class="fu"><a href="crossTime.html">crossTime</a></span><span class="op">(</span><span class="va">bayes</span>, <span class="va">newdata1</span>, <span class="va">newdata2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">tcross</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Est.    2.5%    97.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 7.200161 4.70586 9.943226</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Est.     2.5%    97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.056347 4.485538 5.563484</span>
 <span class="r-in"><span><span class="va">ekm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span><span class="op">~</span><span class="va">arm</span>, data<span class="op">=</span><span class="va">ipass</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>arm<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">St</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="va">bayes</span>, <span class="va">newdata</span><span class="op">)</span></span></span>
