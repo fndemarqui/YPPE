@@ -8,12 +8,6 @@ yppe_fit <- function(time, status, Z, X, n_int, rho, tau,
   p <- ncol(X)
   idt <- as.numeric(cut(time, rho, include.lowest = TRUE))
   ttt <- TTT(time, rho)
-  # ttt <- matrix(nrow=n, ncol=n_int)
-  # for(i in 1:n){
-  #   for(j in 1:n_int){
-  #     ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
-  #   }
-  # }
 
   approach <- ifelse(approach=="mle", 0, 1)
   stan_data <- list(status=status, Z=Z, X=X, p=p, q=q, n=n, m=n_int,
@@ -31,11 +25,6 @@ yppe_fit <- function(time, status, Z, X, n_int, rho, tau,
   if(approach == 0){
     fit <- rstan::optimizing(stanmodels$yppe,data=stan_data,
                              hessian=hessian, ...)
-
-    fit$value <- fit$value - sum(status)*log(tau)
-
-    # fit$par <- fit$par[-grep("loglik", names(fit$par))]
-    # fit$theta_tilde <- fit$theta_tilde[-grep("loglik", names(fit$theta_tilde))]
   }else{
     fit <- rstan::sampling(stanmodels$yppe, data=stan_data, ...)
   }

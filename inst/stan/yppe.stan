@@ -39,7 +39,7 @@ model{
   vector[q == 0 ? 0 : n] lp_long;
   vector[p == 0 ? 0 : n] lp_const;
   vector[n] ratio;
-  vector[n] lht0 = log(gamma[idt]); // - log(tau);
+  vector[n] lht0 = log(gamma[idt]) - log(tau);
   vector[n] Ht0 = ttt*gamma;
   if(survreg == 1){
         lp_short = Z*psi;

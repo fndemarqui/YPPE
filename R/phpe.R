@@ -8,13 +8,6 @@ phpe_fit <- function(time, status, Z, X, n_int, rho, tau,
   q <- ncol(Z)
   idt <- as.numeric(cut(time, rho, include.lowest = TRUE))
   ttt <- TTT(time, rho)
-  # ttt <- matrix(nrow=n, ncol=n_int)
-  # for(i in 1:n){
-  #   for(j in 1:n_int){
-  #     ttt[i,j] <- (min(time[i], rho[j+1]) - rho[j])*(time[i] - rho[j]>0)
-  #   }
-  # }
-
 
   hyper_parms$mu_psi=0
   hyper_parms$sigma_psi=4
@@ -37,7 +30,6 @@ phpe_fit <- function(time, status, Z, X, n_int, rho, tau,
   if(approach == 0){
     fit <- rstan::optimizing(stanmodels$yppe,data=stan_data,
                              hessian=hessian, ...)
-    fit$value <- fit$value - sum(status)*log(tau)
   }else{
     fit <- rstan::sampling(stanmodels$yppe, data=stan_data, ...)
   }
