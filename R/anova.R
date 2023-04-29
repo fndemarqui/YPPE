@@ -20,7 +20,7 @@ extract_formulas <- function(object){
 #' @importFrom stats anova
 #' @export
 #' @param ... further arguments passed to or from other methods.
-#' @return  a list containing the estimated survival probabilities.
+#' @return  the ANOVA table.
 #'
 anova.yppe <- function(...){
   models <- c(as.list(environment()), list(...))

@@ -81,7 +81,7 @@ pope <- function(formula, data, n_int=NULL, rho=NULL, tau=NULL, hessian=TRUE,
   X <- matrix(X[,-1], ncol=length(labels))
   Z <- array(0, dim = c(0, 0))
 
-  n <- nrow(X)
+  n <- length(time)
   q <- ncol(Z)
   p <- ncol(X)
 
