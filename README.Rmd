@@ -2,6 +2,11 @@
 output: github_document
 ---
 
+<!-- badges -->
+[![CRAN\ Status\ Badge](http://r-pkg.org/badges/version/YPPE?color=blue)](http://cran.r-project.org/package=YPPE)
+[![Downloads](http://cranlogs.r-pkg.org/badges/YPPE?color=blue)](http://cran.rstudio.com/package=YPPE)
+<!-- end badges -->
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}

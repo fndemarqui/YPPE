@@ -10,7 +10,7 @@
 \item{...}{further arguments passed to or from other methods.}
 }
 \value{
-a list containing the estimated survival probabilities.
+the ANOVA table.
 }
 \description{
 Compute analysis of variance (or deviance) tables for one or more fitted model objects.

@@ -1,6 +1,4 @@
-url: ~
+url: https://fndemarqui.github.io/YPPE/
 template:
   bootstrap: 5
-development:
-  mode: auto
 

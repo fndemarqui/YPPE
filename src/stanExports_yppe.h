@@ -708,7 +708,7 @@ public:
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> lht0(n);
             stan::math::initialize(lht0, DUMMY_VAR__);
             stan::math::fill(lht0, DUMMY_VAR__);
-            stan::math::assign(lht0,stan::math::log(stan::model::rvalue(gamma, stan::model::cons_list(stan::model::index_multi(idt), stan::model::nil_index_list()), "gamma")));
+            stan::math::assign(lht0,subtract(stan::math::log(stan::model::rvalue(gamma, stan::model::cons_list(stan::model::index_multi(idt), stan::model::nil_index_list()), "gamma")), stan::math::log(tau)));
             current_statement_begin__ = 105;
             validate_non_negative_index("Ht0", "n", n);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> Ht0(n);

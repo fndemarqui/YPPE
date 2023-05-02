@@ -1,4 +1,10 @@
 
+<!-- badges -->
+
+[![CRAN Status Badge](http://r-pkg.org/badges/version/YPPE?color=blue)](http://cran.r-project.org/package=YPPE)
+[![Downloads](http://cranlogs.r-pkg.org/badges/YPPE?color=blue)](http://cran.rstudio.com/package=YPPE)
+<!-- end badges -->
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # YPPE
@@ -56,12 +62,12 @@ summary(mle)
 #> 
 #> Long-term coefficients:
 #>     Estimate   StdErr z.value   p.value    
-#> trt -0.98230  0.29576 -3.3213 0.0008961 ***
+#> trt -0.98230  0.29576 -3.3212 0.0008962 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> --- 
-#> loglik = 6.751216   AIC = 10.49757
+#> loglik = -582.5366   AIC = 1189.073
 
 # Bayesian approach:
 bayes <- yppe(Surv(time, status)~trt, data=gastric, 
@@ -74,12 +80,12 @@ summary(bayes)
 #>     approach = "bayes", refresh = FALSE)
 #> 
 #> Short-term coefficients:
-#>      mean se_mean    sd  2.5%   25%   50%   75% 97.5%   n_eff  Rhat
-#> trt 1.802   0.015 0.636 0.659 1.356 1.761 2.221 3.095 1779.25 1.001
+#>      mean se_mean    sd 2.5%   25%   50%   75% 97.5%    n_eff  Rhat
+#> trt 1.818   0.016 0.639 0.66 1.371 1.783 2.216 3.157 1635.694 1.001
 #> 
 #> Long-term coefficients:
-#>       mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff  Rhat
-#> trt -0.959   0.006 0.309 -1.535 -1.166 -0.967 -0.757 -0.313 2379.755 1.002
+#>       mean se_mean    sd   2.5%    25%    50%    75% 97.5%    n_eff  Rhat
+#> trt -0.964   0.007 0.319 -1.546 -1.183 -0.978 -0.759 -0.32 1981.971 1.001
 #> 
 #> --- 
 #> Inference for Stan model: yppe.
