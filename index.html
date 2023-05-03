@@ -70,13 +70,11 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><p><a href="http://cran.r-project.org/package=YPPE" class="external-link"><img src="http://r-pkg.org/badges/version/YPPE?color=blue" alt="CRAN Status Badge"></a> <a href="http://cran.rstudio.com/package=YPPE" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/YPPE?color=blue" alt="Downloads"></a> <!-- end badges --></p>
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div class="section level1">
+  <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="yppe">YPPE<a class="anchor" aria-label="anchor" href="#yppe"></a>
 </h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
+
 <p>The R package YPPE provides semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2019) &lt;doi.org/10.1214/20-BJPS471&gt;. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -133,12 +131,12 @@
 <span><span class="co">#&gt;     approach = "bayes", refresh = FALSE)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Short-term coefficients:</span></span>
-<span><span class="co">#&gt;      mean se_mean    sd 2.5%   25%   50%   75% 97.5%    n_eff  Rhat</span></span>
-<span><span class="co">#&gt; trt 1.818   0.016 0.639 0.66 1.371 1.783 2.216 3.157 1635.694 1.001</span></span>
+<span><span class="co">#&gt;      mean se_mean    sd  2.5%  25%   50%   75% 97.5%    n_eff  Rhat</span></span>
+<span><span class="co">#&gt; trt 1.821   0.017 0.637 0.704 1.39 1.766 2.224 3.177 1458.016 1.001</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Long-term coefficients:</span></span>
-<span><span class="co">#&gt;       mean se_mean    sd   2.5%    25%    50%    75% 97.5%    n_eff  Rhat</span></span>
-<span><span class="co">#&gt; trt -0.964   0.007 0.319 -1.546 -1.183 -0.978 -0.759 -0.32 1981.971 1.001</span></span>
+<span><span class="co">#&gt;       mean se_mean    sd   2.5%   25%    50%    75%  97.5%    n_eff Rhat</span></span>
+<span><span class="co">#&gt; trt -0.969   0.007 0.315 -1.553 -1.18 -0.984 -0.765 -0.316 2145.055    1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; --- </span></span>
 <span><span class="co">#&gt; Inference for Stan model: yppe.</span></span>
@@ -146,7 +144,6 @@
 <span><span class="co">#&gt; post-warmup draws per chain=1000, total post-warmup draws=4000.</span></span></code></pre></div>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -179,7 +176,14 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=YPPE" class="external-link"><img src="https://www.r-pkg.org/badges/version/YPPE" alt="CRAN status"></a></li>
+<li><a href="https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="http://cran.rstudio.com/package=YPPE" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/YPPE?color=blue" alt="Downloads"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
