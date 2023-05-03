@@ -2,11 +2,6 @@
 output: github_document
 ---
 
-<!-- badges -->
-[![CRAN\ Status\ Badge](http://r-pkg.org/badges/version/YPPE?color=blue)](http://cran.r-project.org/package=YPPE)
-[![Downloads](http://cranlogs.r-pkg.org/badges/YPPE?color=blue)](http://cran.rstudio.com/package=YPPE)
-<!-- end badges -->
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
@@ -21,6 +16,9 @@ knitr::opts_chunk$set(
 # YPPE
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/YPPE)](https://CRAN.R-project.org/package=YPPE)
+[![R-CMD-check](https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml)
+[![Downloads](http://cranlogs.r-pkg.org/badges/YPPE?color=blue)](http://cran.rstudio.com/package=YPPE)
 <!-- badges: end -->
 
 The R package YPPE provides semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2019) <doi.org/10.1214/20-BJPS471>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
