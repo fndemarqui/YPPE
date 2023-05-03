@@ -51,8 +51,13 @@ vcov.yppe <- function(object, ...){
 #' }
 #'
 coef.yppe <- function(object, ...){
+  c <- class(object)[1]
+  if(c == "phpe" | c == "pope"){
+    q <- 0
+  }else{
+    q <- object$q
+  }
   p <- object$p
-  q <- object$q
   coeffs <- object$fit$par[1:(2*q+p)]
   return(coeffs)
 }
