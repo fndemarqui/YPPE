@@ -16,9 +16,10 @@ knitr::opts_chunk$set(
 # YPPE
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/YPPE)](https://CRAN.R-project.org/package=YPPE)
-[![R-CMD-check](https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml)
-[![Downloads](http://cranlogs.r-pkg.org/badges/YPPE?color=blue)](http://cran.rstudio.com/package=YPPE)
+[![R build status](https://github.com/fndemarqui/YPPE/workflows/R-CMD-check/badge.svg)](https://github.com/fndemarqui/YPPE/actions)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/YPPE)](https://cran.r-project.org/package=YPPE)
+[![Downloads](https://cranlogs.r-pkg.org/badges/YPPE)](https://cran.r-project.org/package=YPPE)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/YPPE?color=orange)](https://cran.r-project.org/package=YPPE)
 <!-- badges: end -->
 
 
