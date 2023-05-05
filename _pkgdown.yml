@@ -1,7 +1,5 @@
 url: https://fndemarqui.github.io/YPPE/
 template:
   bootstrap: 5
-
-template:
   params:
     ganalytics: G-P6H7EBDGC9
