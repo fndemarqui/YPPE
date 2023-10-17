@@ -34,7 +34,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/anova.html">Likelihood ratio test using the anova.yppe() function</a>
-    <a class="dropdown-item" href="../articles/simsurv.html">Simulating survival data under the YP model</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -60,7 +59,26 @@
       <small>Source: <a href="https://github.com/fndemarqui/YPPE/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-  </main></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="yppe-version-110">YPPE Version 1.1.0<a class="anchor" aria-label="anchor" href="#yppe-version-110"></a></h2>
+<ul><li><p>survit function returns now a list containing two objects: time and surv associated with the observed survival times and their corresponding survival probabilities.</p></li>
+<li><p>inclusion of model.matrix method</p></li>
+<li><p>implementation of phpe() and phpo() functions to fit proportional hazards (PH) and proportional odds (PO) models.</p></li>
+<li><p>implementation of anova.yppe() function to carry out likelihood ratio tests.</p></li>
+<li><p>implemantation of AIC.yppe() function to compute AIC (Akaike information criterion).</p></li>
+<li><p>implemantation of logLik.yppe() function to extract the log-likelihood value of a fitted model.</p></li>
+<li><p>the YPPE package now requires rstan Version 2.26.</p></li>
+<li><p>update package reference.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="yppe-version-101">YPPE version 1.0.1<a class="anchor" aria-label="anchor" href="#yppe-version-101"></a></h2><p class="text-muted">CRAN release: 2020-01-09</p>
+<ul><li><p>coef() function to extract the regression coefficientes under the MLE approach</p></li>
+<li><p>vcov() function to compute the variance-covariance matrix associated with the regression coefficients under the MLE approach</p></li>
+<li><p>confint() function to compute the 100(1-alpha)% confidence intervals under the MLE approahc</p></li>
+<li><p>bug fix: yppe() function now works properly if both the number of intervals and the time grid (n_int and rho) are passed as arguments; the default time grid is now computed by using all distinct observed failure times as the endpoints of the intervals</p></li>
+</ul></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

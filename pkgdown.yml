@@ -4,8 +4,7 @@ pkgdown_sha: ~
 articles:
   YPPE: YPPE.html
   anova: anova.html
-  simsurv: simsurv.html
-last_built: 2023-05-05T11:39Z
+last_built: 2023-10-17T15:54Z
 urls:
   reference: https://fndemarqui.github.io/YPPE/reference
   article: https://fndemarqui.github.io/YPPE/articles
