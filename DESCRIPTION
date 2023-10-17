@@ -2,7 +2,7 @@ Package: YPPE
 Title: Yang and Prentice Model with Piecewise Exponential Baseline Distribution
 Version: 1.1.0
 Authors@R: person(given = "Fabio", family = "Demarqui", email = "fndemarqui@est.ufmg.br", role = c("aut", "cre", "cph"))
-Description: Semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2021) <doi.org/10.1214/20-BJPS471>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
+Description: Semiparametric modeling of lifetime data with crossing survival curves via Yang and Prentice model with piecewise exponential baseline distribution. Details about the model can be found in Demarqui and Mayrink (2021) <doi:10.1214/20-BJPS471>. Model fitting carried out via likelihood-based and Bayesian approaches. The package also provides point and interval estimation for the crossing survival times.
 License: MIT + file LICENSE
 URL: https://fndemarqui.github.io/YPPE/
 BugReports: https://github.com/fndemarqui/YPPE/issues

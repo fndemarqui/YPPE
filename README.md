@@ -11,6 +11,7 @@ status](https://github.com/fndemarqui/YPPE/workflows/R-CMD-check/badge.svg)](htt
 [![Downloads](https://cranlogs.r-pkg.org/badges/YPPE)](https://cran.r-project.org/package=YPPE)
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/YPPE?color=orange)](https://cran.r-project.org/package=YPPE)
+[![R-CMD-check](https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fndemarqui/YPPE/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The R package YPPE provides semiparametric modeling of lifetime data
@@ -82,11 +83,11 @@ summary(bayes)
 #> 
 #> Short-term coefficients:
 #>      mean se_mean    sd  2.5%   25%   50%   75% 97.5%    n_eff  Rhat
-#> trt 1.801   0.018 0.642 0.578 1.382 1.784 2.206 3.086 1212.294 1.005
+#> trt 1.831   0.016 0.626 0.654 1.394 1.806 2.243 3.154 1599.978 1.001
 #> 
 #> Long-term coefficients:
-#>       mean se_mean    sd   2.5%   25%    50%    75%  97.5%   n_eff  Rhat
-#> trt -0.946    0.02 0.415 -1.546 -1.18 -0.981 -0.762 -0.289 419.911 1.013
+#>       mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff Rhat
+#> trt -0.971   0.007 0.316 -1.554 -1.192 -0.983 -0.778 -0.295 2062.186    1
 #> 
 #> --- 
 #> Inference for Stan model: yppe.

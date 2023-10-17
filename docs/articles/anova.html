@@ -16,7 +16,13 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-P6H7EBDGC9"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P6H7EBDGC9');
+</script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -26,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">YPPE</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +51,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/anova.html">Likelihood ratio test using the anova.yppe() function</a>
-    <a class="dropdown-item" href="../articles/simsurv.html">Simulating survival data under the YP model</a>
   </div>
 </li>
 <li class="nav-item">
@@ -85,7 +90,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fndemarqui.github.io/YPPE/" class="external-link">YPPE</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fndemarqui.github.io/YPPE/">YPPE</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: survival</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">gastric</span><span class="op">)</span></span>
 <span></span>
@@ -98,15 +103,15 @@
 <span><span class="co">#&gt; Model 2 ( po ):  Surv(time, status) ~ trt </span></span>
 <span><span class="co">#&gt; Model 3 ( yp ):  Surv(time, status) ~ trt </span></span>
 <span><span class="co">#&gt; --- </span></span>
-<span><span class="co">#&gt;            loglik       LR df  Pr(&gt;Chi)    </span></span>
-<span><span class="co">#&gt; Model 1:  0.88432 11.73379  1 0.0006138 ***</span></span>
-<span><span class="co">#&gt; Model 2:  2.74024  8.02194  1 0.0046214 ** </span></span>
-<span><span class="co">#&gt; Model 3:  6.75122        -  -         -    </span></span>
+<span><span class="co">#&gt;             loglik        LR df  Pr(&gt;Chi)    </span></span>
+<span><span class="co">#&gt; Model 1: -588.4035   11.7338  1 0.0006138 ***</span></span>
+<span><span class="co">#&gt; Model 2: -586.5475    8.0219  1 0.0046214 ** </span></span>
+<span><span class="co">#&gt; Model 3: -582.5366         -  -         -    </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">AIC</a></span><span class="op">(</span><span class="va">ph</span>, <span class="va">po</span>, <span class="va">yp</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       yp       po       ph </span></span>
-<span><span class="co">#&gt; 10.49757 16.51951 20.23136</span></span></code></pre></div>
+<span><span class="co">#&gt; 1189.073 1195.095 1198.807</span></span></code></pre></div>
   </main>
 </div>
 

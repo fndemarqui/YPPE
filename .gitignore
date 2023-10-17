@@ -8,3 +8,7 @@ inst/doc
 src/stanExports_yppe.o
 /doc/
 docs
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto

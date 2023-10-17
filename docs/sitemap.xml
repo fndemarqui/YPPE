@@ -1,129 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/articles/YPPE.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/anova.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/articles/YPPE.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/articles/anova.html</loc>
   </url>
   <url>
-    <loc>/articles/simsurv.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/articles/index.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/articles/simsurv.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/authors.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/index.html</loc>
   </url>
   <url>
-    <loc>/reference/AIC.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/YPPE-package.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/AIC.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/anova.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/YPPE-package.html</loc>
   </url>
   <url>
-    <loc>/reference/coef.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/anova.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/confint.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/coef.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/crossTime-methods.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/confint.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/crossTime.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/crossTime-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/gastric.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/crossTime.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/gastric.html</loc>
   </url>
   <url>
-    <loc>/reference/ipass.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/logLik.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/ipass.html</loc>
   </url>
   <url>
-    <loc>/reference/model.matrix.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/logLik.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/pehaz.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/model.matrix.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/pexp.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/pehaz.html</loc>
   </url>
   <url>
-    <loc>/reference/phpe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/pexp.html</loc>
   </url>
   <url>
-    <loc>/reference/pope.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/phpe.html</loc>
   </url>
   <url>
-    <loc>/reference/print.summary.phpe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/pope.html</loc>
   </url>
   <url>
-    <loc>/reference/print.summary.pope.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/print.summary.phpe.html</loc>
   </url>
   <url>
-    <loc>/reference/print.summary.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/print.summary.pope.html</loc>
   </url>
   <url>
-    <loc>/reference/rates.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/print.summary.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/rates.phpe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/rates.html</loc>
   </url>
   <url>
-    <loc>/reference/rates.pope.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/rates.phpe.html</loc>
   </url>
   <url>
-    <loc>/reference/rates.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/rates.pope.html</loc>
   </url>
   <url>
-    <loc>/reference/rsurv.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/rates.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.phpe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/rsurv.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.pope.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/summary.phpe.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/summary.pope.html</loc>
   </url>
   <url>
-    <loc>/reference/survfit.phpe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/summary.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/survfit.pope.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/survfit.phpe.html</loc>
   </url>
   <url>
-    <loc>/reference/survfit.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/survfit.pope.html</loc>
   </url>
   <url>
-    <loc>/reference/timeGrid.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/survfit.yppe.html</loc>
   </url>
   <url>
-    <loc>/reference/vcov.yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/timeGrid.html</loc>
   </url>
   <url>
-    <loc>/reference/yppe.html</loc>
+    <loc>https://fndemarqui.github.io/YPPE/reference/vcov.yppe.html</loc>
+  </url>
+  <url>
+    <loc>https://fndemarqui.github.io/YPPE/reference/yppe.html</loc>
   </url>
 </urlset>
