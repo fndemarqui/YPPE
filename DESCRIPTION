@@ -19,15 +19,15 @@ Imports:
     Formula,
     Rcpp (>= 0.12.0),
     Rdpack,
-    rstan (>= 2.18.1),
+    rstan (>= 2.26.0),
     rstantools (>= 2.0.0)
 RdMacros: Rdpack
 LinkingTo: 
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
     RcppEigen (>= 0.3.3.3.0),
-    rstan (>= 2.18.1),
-    StanHeaders (>= 2.18.0)
+    rstan (>= 2.26.0),
+    StanHeaders (>= 2.26.0)
 SystemRequirements: GNU make
 RoxygenNote: 7.2.3
 Suggests: 

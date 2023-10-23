@@ -9,7 +9,7 @@ data{
   int<lower=0> p;
   int survreg;
   vector[n] status;
-  int idt[n];
+  array[n] int idt;
   matrix[q == 0 ? 0 : n, q] Z;
   matrix[p == 0 ? 0 : n, p] X;
   real<lower=0> tau;
